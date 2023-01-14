@@ -37,7 +37,7 @@
 
 
 ## 設計書
-・実装機能リスト：https://docs.google.com/spreadsheets/d/1TmJccnKONSRP7JMPVDvd0CWB2pOJa6m-mAJ7X7ikYaE/edit?usp=sharing  
+・実装機能リスト：https://docs.google.com/spreadsheets/d/1TmJccnKONSRP7JMPVDvd0CWB2pOJa6m-mAJ7X7ikYaE/edit?usp=sharing
 ・UI Flows: https://drive.google.com/file/d/1zhHORWG39Kk_SpQItYIXLzVp1Vw_jBCA/view?usp=sharing  
 ・ワイヤーフレーム、ER図：https://drive.google.com/file/d/1ZPpKOgwUkcDgbSJ6-MeqIT6qksgvNPWf/view?usp=sharing
 
