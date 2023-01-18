@@ -9,7 +9,15 @@
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
-/db/*.sqlite3-*
+#/db/*.sqlite3-* →これをコメントアウトして、下の行を追加
+/db/*.sqlite3-journal
+
+#DBを指定していない場合にデフォルトで生成されるdb.sqlite3
+#SQLite3 には、journal mode と wal mode というのがある。SQLite3 のデフォルトは wal mode だが、Prisma は journal mode を意図的に採用している。
+#WAL mode を有効にしないかという Issue) https://github.com/prisma/prisma/issues/3303
+#.db-journal のファイルは .db への書き込みが失敗した時のロールバック用に使われるらしい。
+#.db-journal ファイルは、それがロールバックの待機状態である「ホット」とそれ以外の状態がある。
+#↑↑メンターに確認する
 
 # Ignore all logfiles and tempfiles.
 /log/*
