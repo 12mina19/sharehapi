@@ -6,13 +6,73 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!--ここ後でBootstrap関連で編集する必要有-->
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+<!--ここから上はもとから記述があった部分-->
 
-  <body>
+
+ <body>
+    <header>
+      <div class="heading">
+        <!--サイトのロゴ-->
+        <%= link_to root_path do %>
+          <%= image_tag('no-image.jpg', size: "200x50") %>
+        <% end %>
+
+
+        <!--管理者がログインした時-->
+        <% if admin_signed_in? %>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        <!--顧客がログインしている時-->
+        <% elsif user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <!--管理者と顧客がログインしていない時-->
+        <% else %>
+          <%= link_to "新規登録", new_user_registration_path %>
+          <%= link_to "ユーザー：ログイン", new_user_session_path %>
+          <%= link_to "管理者：ログイン", new_admin_session_path %>
+        <% end %>
+
+      </div>
+    </header>
+
+
+    <nav>
+      <!--管理者がログインした時-->
+      <% if admin_signed_in? %>
+        会員一覧
+        カテゴリー関連
+        検索窓
+      <!--顧客がログインしている時-->
+      <% elsif user_signed_in? %>
+        マイページ
+        人気順
+        カテゴリー
+        検索窓
+      <!--管理者と顧客がログインしていない時-->
+      <% else %>
+        人気順
+        カテゴリー
+        検索窓
+      <% end %>
+
+    <!--nav-listの書き方参照する-->
+    <!--  <ul class="nav-list">-->
+    <!--    <li class="nav-list-item">-->
+    <!--      <a href="index.html">Home</a>-->
+    <!--    </li>-->
+    <!--    <li class="nav-list-item">About</li>-->
+    <!--    <li class="nav-list-item">Topic</li>-->
+    <!--  </ul>-->
+    <!--</nav>-->
+
+
     <%= yield %>
   </body>
 </html>
 
-<!--ここから上はもとから記述があった部分-->
+
+
