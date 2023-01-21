@@ -1,3 +1,15 @@
-<h1>my登録情報確認画面</h1>
-
-<!--まず、ここに情報が出るようにしてみて、その後、実際にログインしてみてエラーが出ないか確認する-->
+<div class="container-fluid">
+  
+  <h4>public/users#show</h4>
+  <h2>my登録情報確認</h2>
+  
+  <!--まず、ここに情報が出るようにしてみて、その後、実際にログインしてみてエラーが出ないか確認する-->
+  
+  <label>名前（ニックネーム）</label>
+  <%= @user.name %><br>
+  <label>メールアドレス</label>
+  <%= @user.email %><br>
+  
+  <%= link_to "編集する", users_information_edit_path %>
+  
+</div>

@@ -6,9 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!--ここ後でBootstrap関連で編集する必要有-->
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!--Bootstrap導入のために、link_tagをpack_tagに書き換え-->
+    <!--stylesheet_link_tagの場合cssファイルは、app/assets 配下のファイルを参照。
+        stylesheet_pack_tagの場合は、app/javascript 配下のファイルを参照-->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 <!--ここから上はもとから記述があった部分-->

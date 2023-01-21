@@ -11,3 +11,10 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+// Bootstrap導入のために記述
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application"

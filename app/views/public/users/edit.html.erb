@@ -1,2 +1,20 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container-fluid">
+
+  <h4>Public::Users#edit</h4>
+  <h2>my登録情報編集</h2>
+
+    <%= form_with model: @user, url:users_information_path, method: :patch do |f| %>
+      <!--label forに同じ名前は付けられない。-->
+      <!--ここでlabel forを使って関連付けることによって「氏名」や「フリガナ」をクリックすると枠が反応するようになる。ラジオボタンと同じようなシステム-->
+      <!--label for(htmlの書き方）でもいいけど、railsの書き方はf.labelになる。コンパイアー(記述変換)されて最終的にはlabel forになるのでどっちでもいい-->
+
+      　<label for="inputName">名前（ニックネーム）</label>
+      　<%= f.text_field:name, autofocus: true, id:"inputName" %><br>
+      　<label for="email">メールアドレス</label>
+      　<%= f.text_field:email, autofocus: true, id:"email" %><br>
+
+      　<%= f.submit "変更保存ボタン" %>
+      　<!--, class: "btn btn-success btn-sm-->
+    <% end %>
+
+</div>
