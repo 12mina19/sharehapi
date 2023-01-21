@@ -1,0 +1,39 @@
+<h4>Admin::Users#index</h4>
+<h2>会員一覧</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th width="80">会員ID</th>
+      <th width="150">氏名</th>
+      <th width="250">メールアドレス</th>
+      <th width="100">ステータス</th>
+      <th width="80">利用制限</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= link_to user.name, admin_user_path(user.id) %></td>
+        <td><%= user.email %></td>
+        <td>
+          <% if user.is_deleted? %>
+            <font color="#a9a9a9">退会</font>
+          <% else %>
+            <font color="#32cd32">有効</font>
+          <% end %>
+        </td>
+        <td>
+          <% if user.is_unpermitted? %>
+            <font color="#ff2323">利用停止</font>
+          <% else %>
+            －
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
