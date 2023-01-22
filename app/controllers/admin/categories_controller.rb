@@ -8,6 +8,9 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def index
+    @category = Category.new
+    #コントローラーに（@category = Category.new）かform_withのところに（model: Category.new）を書かないとparams enptyのエラー出るし、
+    #text_fieldに前工程の値（Category）が初期値として無駄に表示されてしまう。
     @categories = Category.all
   end
 

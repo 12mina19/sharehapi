@@ -1,2 +1,13 @@
-<h1>Admin::Categories#edit</h1>
-<p>Find me in app/views/admin/categories/edit.html.erb</p>
+<h4>Admin::Categories#edit</h4>
+
+<h4>カテゴリー編集</h4>
+
+<%= form_with model: Category.new, url:admin_category_path, method: :patch do |f| %>
+
+  <label for="categoryName">カテゴリー名</label>
+  <%= f.text_field:name, autofocus: true, id:"categoryName", placeholder: "カテゴリー名", class: "ml-3" %>
+
+  <%= f.submit '変更を保存', class: "btn btn-success w-35 ml-5" %>
+
+
+<% end %>
