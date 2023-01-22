@@ -38,12 +38,16 @@ class Public::SessionsController < Devise::SessionsController
     return if !@user
     #アカウントを取得できなかった場合、このメソッドを終了
     #そもそもemailがヒットしなければ、退会どころか、そもそも登録したこともない
-    if @user.valid_password?(params[:customer][:password]) && @customer.is_deleted == true
+    if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
+    #&&は「and」
+    #論理積( AND )は演算子 && の左辺及び右辺の条件式が共に true の場合のみ全体の式の評価が true となり
     #「取得したアカウントのパスワードと入力されたパスワードが一致しているかを判別」かつ「退会済」だった場合
     #.valid_password?…　「？」があるメソッドは、自動的にtrueとfalseが認識される。だからあえて＝＝trueなどを書く必要はない
     #.valid_password?の部分が、trueでもfalseでも、「.is_deleted == true」の場合は新規登録に戻る必要がある。
     redirect_to new_user_registration_path
     end
   end
+  
+  #管理者に利用停止にされた人(is_unpermitted：True)がログインできないようにしたい。新規投稿（同じメールアドレスはダメ）はregitrationの画面に書く。
 
 end
