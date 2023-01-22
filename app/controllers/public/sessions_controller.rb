@@ -48,6 +48,19 @@ class Public::SessionsController < Devise::SessionsController
     end
   end
   
+    # return if <ある場合でない時>
+    #   <処理手順>
+    # if <ある場合>
+    #   <処理手順>
+  
+      
   #管理者に利用停止にされた人(is_unpermitted：True)がログインできないようにしたい。新規投稿（同じメールアドレスはダメ）はregitrationの画面に書く。
+  # def unpermit_state
+  #   @user = User.find_by(email: params[:user][:email])
+  #   return if !@user
+  #   if @user.valid_password?(params[:user][:password]) && @user.is_unpermit == true
+  #   redirect_to topページへ
+  #   end
+  # end
 
 end

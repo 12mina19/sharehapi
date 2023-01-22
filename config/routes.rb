@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :admin do
+    get 'categories/index'
+    get 'categories/edit'
+  end
+  namespace :admin do
     get 'users/index'
     get 'users/show'
     get 'users/edit'
@@ -19,8 +23,8 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  root to: "public/homes#top"
 
+  root to: "public/homes#top"
 
   #【public/usersコントローラー】
   scope module: :public do
@@ -31,6 +35,7 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdraw'
   end
 
+
   #【admin/homesコントローラ】
   namespace :admin do
     get '/' => 'homes#top'
@@ -39,6 +44,11 @@ Rails.application.routes.draw do
   #【admin/usersコントローラー】
   namespace :admin do
      resources :users, only:[:index, :show, :edit, :update]
+  end
+
+  #【admin/categoriesコントローラー】
+  namespace :admin do
+    resources :categories, only:[:index, :create, :edit, :update, :destroy]
   end
 
 end
