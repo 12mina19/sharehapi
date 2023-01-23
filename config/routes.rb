@@ -26,6 +26,11 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdraw'
   end
 
+  #【public/postsコントローラー】
+  scope module: :public do
+    resources :posts, only:[:index, :new, :create, :show, :destroy]
+  end
+
 
   #【admin/homesコントローラ】
   namespace :admin do
