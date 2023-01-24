@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   def index
     @posts = Post.all
+    @categories = Category.all
   end
 
   def new
@@ -8,7 +9,6 @@ class Public::PostsController < ApplicationController
 
   end
 
-  #@categories = Category.all
 
   def create
 

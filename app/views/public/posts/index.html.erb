@@ -1,1 +1,19 @@
 <h4>Public::Posts#index</h4>
+
+<% @posts.each do |post| %>
+
+<%=time_ago_in_words(post.created_at)%>前
+<%= post.user.name %><br>
+
+<%= post.post_text %>
+<% if post.image.attached? %>
+  <%= image_tag post.image, size: "100x100" %>
+<% else %>
+  <%= image_tag 'no-image.jpg', size: "100x100" %>
+<% end %>
+
+<!--<%# @categories.each do |category| %>-->
+<!--  <%#= category.name %><br>-->
+<!--<%# end %>これはこの投稿だけ？？それともとりあえず全ジャンルを表示させてるだけ？？？-->
+
+<% end %>
