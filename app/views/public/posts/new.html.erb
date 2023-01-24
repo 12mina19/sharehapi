@@ -9,7 +9,7 @@
 
   <label>②カテゴリー選択（複数選択可能）</label><br>
 
-  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %><br>
   <!--この1行を書けばいい。Category.allでカテゴリーモデルの全ての情報がゲット出来る。そして、その中で必要な情報は：idと：name-->
   <!--each文を使って全カテゴリーを表示させることもできるが、Category.allを書くだけで、each文を書く必要がなくなる！便利！-->
 

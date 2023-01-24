@@ -14,6 +14,20 @@
 
 <!--<%# @categories.each do |category| %>-->
 <!--  <%#= category.name %><br>-->
-<!--<%# end %>これはこの投稿だけ？？それともとりあえず全ジャンルを表示させてるだけ？？？-->
+<!--<%# end %>
+
+<% if @post.favorited_by?(current_user) %>
+    <p>
+      <%= link_to favorites_path(@post), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to favorites_path(@post), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
 
 <% end %>

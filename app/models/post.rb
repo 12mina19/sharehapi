@@ -6,4 +6,13 @@ class Post < ApplicationRecord
   has_many :categories, through: :post_categories
 
   belongs_to :user
+
+  #いいね機能
+  has_many :favorites, dependent: :destroy
+
+  #この(user)にfavoritedされているかを確認するメソッド
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
 end
