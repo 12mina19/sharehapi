@@ -5,13 +5,27 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+
   end
 
+  #@categories = Category.all
+
   def create
+
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      category_ids = params[:category_ids]
+      category_ids.shift
+      category_ids.each do |id|
+        @post.post_categories.create!(category_id: id)
+        #いいね機能と同じようなイメージ
+        #ここで、PostモデルとPostcategoryモデル・categoryモデルを紐付けているイメージ
+        #post_categoryモデルと作ることで、カテゴリー（タグ）が紐付く。カテゴリーidとPost idをpost_categoryに格納。
+        #タグ付けも同じ方法で出来る。
+      end
+      redirect_to posts_path
+    end
   end
 
   def show
@@ -24,6 +38,7 @@ class Public::PostsController < ApplicationController
   protected
 
   def post_params
-    params.require(:post).permit(:user_id, :category_id, :post_text, :image)
+    params.permit(:user_id, :category_id, :post_text, :image)
   end
+
 end

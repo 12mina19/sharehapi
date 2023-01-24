@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
       #if resource.is_a?(Admin)…resource がAdmin のインスタンスであれば true を返すという処理
       admin_path
       #投稿一覧（管理者TOP）画面へ
-    else customer_signed_in?
+    else user_signed_in?
       root_path
     end
   end

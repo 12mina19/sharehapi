@@ -2,17 +2,22 @@
 
 <h2>新規登録</h2>
 
-<%= form_with model: @post do |f| %>
+<%= form_with  url: posts_path, method: :post do |f| %>
 
   <label for="post_text">①happyな出来事を投稿しよう！！</label><br>
   <%= f.text_area :post_text, autofocus: true, id:"post_text" %><br>
 
   <label>②カテゴリー選択（複数選択可能）</label><br>
 
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
+  <!--この1行を書けばいい。Category.allでカテゴリーモデルの全ての情報がゲット出来る。そして、その中で必要な情報は：idと：name-->
+  <!--each文を使って全カテゴリーを表示させることもできるが、Category.allを書くだけで、each文を書く必要がなくなる！便利！-->
+
+
   <label>③共有したい写真があればUPしよう♪（任意）</label><br>
   <%= f.file_field :image, accept: "image/*" %><br>
 
-  <%= f.submit '投稿' %>
+  <%= f.submit '投稿する' %>
 
 
 <% end %>
