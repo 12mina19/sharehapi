@@ -28,8 +28,9 @@ Rails.application.routes.draw do
 
   #【public/postsコントローラー】
   scope module: :public do
-    resources :posts, only:[:index, :new, :create, :show, :destroy]
+    resources :posts, only:[:index, :new, :create, :show, :destroy] do
       resource :favorites, only: [:create, :destroy]
+    end
   end
 
 

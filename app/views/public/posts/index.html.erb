@@ -5,27 +5,27 @@
 <%=time_ago_in_words(post.created_at)%>前
 <%= post.user.name %><br>
 
+<div style="width: 300px;">
 <%= post.post_text %>
+</div>
 <% if post.image.attached? %>
   <%= image_tag post.image, size: "100x100" %>
 <% else %>
   <%= image_tag 'no-image.jpg', size: "100x100" %>
 <% end %>
 
-<!--<%# @categories.each do |category| %>-->
-<!--  <%#= category.name %><br>-->
-<!--<%# end %>
 
-<% if @post.favorited_by?(current_user) %>
-    <p>
-      <%= link_to favorites_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
+
+<% if post.favorited_by?(current_user) %>
+
+      <%= link_to post_favorites_path(post), method: :delete do %>
+        ♥<%= post.favorites.count %> いいね
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to favorites_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
+      <%= link_to post_favorites_path(post), method: :post do %>
+        ♡<%= post.favorites.count %> いいね
       <% end %>
     </p>
   <% end %>
