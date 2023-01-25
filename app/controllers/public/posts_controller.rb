@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   def index
     @posts = Post.all
     @categories = Category.all
+    @comments = Comment.all
   end
 
   def new
@@ -27,6 +28,9 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+    #コメントを投稿するためのインスタンス変数を定義
   end
 
   def destroy

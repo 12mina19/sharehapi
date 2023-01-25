@@ -1,2 +1,57 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<h2>Public::Posts#show（コメント投稿画面）</h2>
+
+  <%=time_ago_in_words(@post.created_at)%>前
+  <%#= @post.created_at.strftime('%Y/%m/%d') %>
+  <%= @post.user.name %><br>
+  <%= @post.post_text %>
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no-image.jpg', size: "100x100" %>
+  <% end %>
+
+
+  <% if @post.favorited_by?(current_user) %>
+      <%= link_to post_favorites_path(@post.id), method: :delete do %>
+        ♥<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_favorites_path(@post.id), method: :post do %>
+        ♡<%= @post.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+
+  <p>コメント件数：<%= @post.comments.count %></p>
+
+
+
+<div>
+  <!--投稿されたコメントを表示-->
+  <% @post.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%#= comment.created_at.strftime('%Y/%m/%d') %>
+    <%=time_ago_in_words(@post.created_at)%>前
+    <%= comment.comment %>
+
+    <% if comment.user == current_user %>
+      <%#メシテロ参照= link_to "削除", post_comment_path(post_comment.post_image, post_comment), method: :delete %>
+      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+      <!--(comment.post, comment)-->
+      <!--post_comment DELETE /posts/:post_id/comments/:id(.:format)       public/comments#destroy-->
+      <!--コメントを削除しようとして、idがないというエラーが出てる-->
+    <% end %>
+  <% end %>
+</div>
+
+<br>
+<div>
+  <!--コメント投稿フォーム-->
+  >> <%= @post.user.name %>さんの投稿にコメントする
+  <%= form_with model: [@post, @comment] do |f| %>
+    <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %><br>
+    <%= f.submit "コメントを投稿" %>
+  <% end %>
+</div>
