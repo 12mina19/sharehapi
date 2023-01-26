@@ -28,7 +28,7 @@
     </p>
   <% end %>
 
-  <p>コメント件数：<%= post.comments.count %></p>
+  <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
 
 <% end %>
 

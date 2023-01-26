@@ -58,3 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #devise導入のために記述
 gem 'devise'
+
+#ドロップダウンメニューを作成するために、jQueryを読み込む
+gem 'jquery-rails'
