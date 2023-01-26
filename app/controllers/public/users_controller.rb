@@ -2,6 +2,8 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = current_user
+    #試しにカテゴリーの記述してみた
+    @categories = Category.all
   end
 
   def edit

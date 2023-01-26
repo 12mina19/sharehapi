@@ -12,7 +12,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <!--ドロップダウンメニューを作りたくて記述したが、開かない-->
+    <!--ドロップダウンメニュー作成のために記述-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
@@ -44,7 +44,7 @@
       </div>
     </header>
 
-
+    <!--navbarの2段目、ドロップダウンメニュー-->
     <nav>
       <!--管理者がログインした時-->
       <% if admin_signed_in? %>
@@ -53,56 +53,57 @@
         検索窓
       <!--顧客がログインしている時-->
       <% elsif user_signed_in? %>
-        マイページ
-        人気順
-        カテゴリー
-        検索窓
-       <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+       <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          マイページ
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">my投稿一覧</a>
-          <a class="dropdown-item" href="#">myいいね一覧</a>
-          <a class="dropdown-item" href="#"><%= link_to "登録内容確認・編集", users_my_page_path %></a>
-          <a class="dropdown-item" href="#">退会手続</a>
-        </div>
-      </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                マイページ
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item">my投稿一覧</a>
+                <a class="dropdown-item">myいいね一覧</a>
+                <a class="dropdown-item"><%= link_to "登録内容確認・編集", users_my_page_path %></a>
+                <a class="dropdown-item"><%= link_to "退会手続", users_unsubscribe_path %></a>
+              </div>
+            </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          人気順
-        </a>
-      </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                人気順
+              </a>
+            </li>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          カテゴリー
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                カテゴリー
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!--ここのカテゴリーはeach文で回して表示させる-->
+                <% @categories.each do |category| %>
+                  <a class="dropdown-item"><%= link_to category.name, posts_path(category_id: category.id) %></a>
+                    <!--idを指定して取り出したい時は↑こういう書き方になる-->
+                    <!--(genre_id: genre.id)これ書かないとエラー出る。-->
+                    <!--genre_idで検索をかけて、その中(左側のgenre_id)からgenre.idというのを探す。数に例えると分かりやすい-->
+                    <!--CategoryのNoMethodError in Public::Users#showと出たので、その指示取りに@categoriesをそこに定義してみた。エラー解消したが、なんでshowアクションか理解できていない-->
+                    <!--NoMethodError in Public::Posts#newこのエラーはわかる。もしかして、navberにカテゴリー設定したから全ての画面で定義が必要なのかな…？混乱してきた-->
+                <% end %>
+              </div>
+            </li>
+          </ul>
 
-          <!--ここのカテゴリーはeach文で回して表示されるようにしたい。-->
-        </div>
-      </li>
-    </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-
-  </div>
-</nav>
+      </div>
+    </nav>
 
 
       <!--管理者と顧客がログインしていない時-->
