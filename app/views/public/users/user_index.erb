@@ -30,4 +30,11 @@
 
   <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
 
+  <%#= link_to "投稿削除", user_destroy_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <%# if post.user == current_user %>
+    <td>
+    <%= link_to "投稿削除", destroy_user_post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
+    </td>
+  <%# end %>
+
 <% end %>

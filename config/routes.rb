@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     patch 'users/information' => 'users#update'
     get 'users/unsubscribe' => 'users#unsubscribe'
     patch 'users/withdraw' => 'users#withdraw'
-    get 'user/user_index' => 'users#user_index'
+    get 'users/user_index' => 'users#user_index'
+    delete 'users/destroy/:id' => 'users#destroy', as: 'destroy_user_post'
+    get 'users/user_favorites' => 'users#user_favorites'
+    # get 'users/myfavorites' => 'users#myfavorites'
   end
 
   #【public/postsコントローラー】

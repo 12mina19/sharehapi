@@ -22,6 +22,7 @@ class Public::UsersController < ApplicationController
   #退会確認画面用
   def unsubscribe
     @user = current_user
+    @categories = Category.all
   end
 
   #退会処理（ステータスの更新）
@@ -34,11 +35,27 @@ class Public::UsersController < ApplicationController
     #rootページにフラッシュメッセージの<%= notice %>を設置してみたが果たしてちゃんと処理されているだろうか…？？？
   end
 
+  #ログインユーザーのみの投稿一覧
   def user_index
     @user = current_user
     @posts = @user.posts
     @categories = Category.all
-    
+  end
+
+  #ログインユーザーの投稿削除機能
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to user_user_index_path
+    #user_indexの時点でログインユーザー（投稿者）のみの表示にしてあるため、ここのアクション・Viewでは特に制限かけていない。
+  end
+
+  #ログインユーザーのみのいいね一覧
+  # def myfavorites
+  def user_favorites
+    @user = current_user
+    @favorites = Favorite.where(user_id: @user.id)
+    @categories = Category.all
   end
 
 
