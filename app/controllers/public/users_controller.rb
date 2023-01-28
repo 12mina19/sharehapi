@@ -34,6 +34,13 @@ class Public::UsersController < ApplicationController
     #rootページにフラッシュメッセージの<%= notice %>を設置してみたが果たしてちゃんと処理されているだろうか…？？？
   end
 
+  def user_index
+    @user = current_user
+    @posts = @user.posts
+    @categories = Category.all
+    
+  end
+
 
 
   protected

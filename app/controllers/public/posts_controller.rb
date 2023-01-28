@@ -31,6 +31,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     #コメントを投稿するためのインスタンス変数を定義
+    @categories = Category.all
   end
 
   def destroy

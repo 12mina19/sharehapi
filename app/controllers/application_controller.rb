@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
       admin_path
       #投稿一覧（管理者TOP）画面へ
     else user_signed_in?
-      root_path
+      posts_path
     end
   end
 

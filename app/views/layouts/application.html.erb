@@ -23,9 +23,16 @@
     <header>
       <div class="heading">
         <!--サイトのロゴ-->
-        <%= link_to root_path do %>
-          <%= image_tag('no-image.jpg', size: "200x50") %>
+        <% if user_signed_in? %>
+          <%= link_to posts_path do %>
+            <%= image_tag('no-image.jpg', size: "200x50") %>
+          <% end %>
+        <% else %>
+          <%= link_to root_path do %>
+            <%= image_tag('no-image.jpg', size: "200x50") %>
+          <% end %>
         <% end %>
+        <!--あとでadminの分も設定する-->
 
 
         <!--管理者がログインした時-->
@@ -66,7 +73,7 @@
                 マイページ
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item">my投稿一覧</a>
+                <a class="dropdown-item"><%= link_to "my投稿一覧", user_user_index_path %></a>
                 <a class="dropdown-item">myいいね一覧</a>
                 <a class="dropdown-item"><%= link_to "登録内容確認・編集", users_my_page_path %></a>
                 <a class="dropdown-item"><%= link_to "退会手続", users_unsubscribe_path %></a>
