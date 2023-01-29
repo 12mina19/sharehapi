@@ -1,8 +1,10 @@
 <h4>Public::Posts#index</h4>
 
-<%= link_to '新着順', posts_path %>
-<%= link_to '古い順', posts_path(sort: 'old') %>
-<%= link_to 'いいね順', posts_path(sort: 'good') %>
+<!--並び替えの切り替え土台-->
+<%#= link_to '新着順', posts_path %>
+<%#= link_to '古い順', posts_path(sort: 'old') %>
+<%#= link_to 'いいね順', posts_path(sort: 'good') %>
+
 
 <% @posts.each do |post| %>
 

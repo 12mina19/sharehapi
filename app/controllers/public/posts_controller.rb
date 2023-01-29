@@ -1,14 +1,26 @@
 class Public::PostsController < ApplicationController
 
   def index
+
+    if params[:category_id]
+      post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
+      # post_ids => [1,4]
+      @posts = Post.where(id: post_ids)
+    else
+      @posts = Post.all
+    end
+
     case params[:sort]
     when 'good'
-      @posts = Post.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
     when 'old'
-      @posts = Post.all.order(created_at: :asc)
+      @posts = @posts.order(created_at: :asc)
     else
-      @posts = Post.all.order(created_at: :desc)
+      @posts = @posts.order(created_at: :desc)
     end
+
+    #@posts = Post.where(id: params[:category_id]).order(created_at: :desc)
+    #@posts = Post.category(params[:category_id]).order(created_at: :desc)
 
     @categories = Category.all
     @comments = Comment.all

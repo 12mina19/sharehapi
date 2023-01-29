@@ -11,7 +11,7 @@ class Public::FavoritesController < ApplicationController
     @post = Post.find(params[:post_id])
     favorite = current_user.favorites.find_by(post_id: @post.id)
     favorite.destroy
-    if params[:ref] == 'favorite'
+    if params[:ref] == 'favorite'#public/user#user_favorites.erbに'favorite'の記述あり
       redirect_to users_user_favorites_path#t投稿一覧へ
     else
       redirect_to posts_path

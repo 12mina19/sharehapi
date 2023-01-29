@@ -109,34 +109,15 @@
               </div>
             </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                並び替え
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item"><%= link_to '新着順', posts_path %></a>
-                <a class="dropdown-item"><%= link_to '古い順', posts_path(sort: 'old') %></a>
-                <a class="dropdown-item"><%= link_to 'いいね順', posts_path(sort: 'good') %></a>
-              </div>
-            </li>
+            <%= form_with url: posts_path, method: :get do |f| %>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                カテゴリー
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <!--ここのカテゴリーはeach文で回して表示させる-->
-                <% @categories.each do |category| %>
-                  <a class="dropdown-item"><%= link_to category.name, posts_path(category_id: category.id) %></a>
-                    <!--idを指定して取り出したい時は↑こういう書き方になる-->
-                    <!--(genre_id: genre.id)これ書かないとエラー出る。-->
-                    <!--genre_idで検索をかけて、その中(左側のgenre_id)からgenre.idというのを探す。数に例えると分かりやすい-->
-                    <!--NoMethodError in Public::Posts#newこのエラーはわかる。もしかして、navberにカテゴリー設定したから全ての画面で定義が必要なのかな…？混乱してきた-->
-                <% end %>
-              </div>
+               <%= f.select :sort, [['新着順', 'new'], ['古い順', "old"], ['いいね順', "good"]], include_blank: "選択して下さい", selected: params[:sort] %>
+               <%= f.select :category_id, Category.pluck('name, id'), include_blank: "選択して下さい", selected: params[:category_id] %>
 
-            </li>
+               <%= f.submit '送信'%>
+            <% end %>
           </ul>
+
 
           <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
