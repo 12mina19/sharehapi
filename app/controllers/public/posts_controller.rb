@@ -1,6 +1,15 @@
 class Public::PostsController < ApplicationController
+
   def index
-    @posts = Post.all
+    case params[:sort]
+    when 'good'
+      @posts = Post.joins(:favorites).group(:post_id).order("count(post_id) desc")
+    when 'old'
+      @posts = Post.all.order(created_at: :asc)
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
+
     @categories = Category.all
     @comments = Comment.all
   end

@@ -52,15 +52,10 @@
     </header>
 
     <!--navbarの2段目、ドロップダウンメニュー-->
-    <nav>
+
       <!--管理者がログインした時-->
       <% if admin_signed_in? %>
-        会員一覧
-        カテゴリー関連
-        検索窓
-      <!--顧客がログインしている時-->
-      <% elsif user_signed_in? %>
-       <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -68,8 +63,42 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
 
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                会員一覧
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                カテゴリー関連
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+      </nav>
+
+
+      <!--顧客がログインしている時-->
+      <% elsif user_signed_in? %>
+      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <!--<li class="nav-item">-->
+            <!--  <a class="nav-link">-->
+            <!--    <%#= link_to "Top", posts_path, class: "link" %>-->
+            <!--  </a>-->
+            <!--</li>-->
+
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 マイページ
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -81,7 +110,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link">
                 人気順
               </a>
             </li>
@@ -109,8 +138,8 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
 
-      </div>
-    </nav>
+        </div>
+      </nav>
 
 
       <!--管理者と顧客がログインしていない時-->

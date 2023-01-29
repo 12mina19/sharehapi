@@ -56,6 +56,10 @@ class Public::UsersController < ApplicationController
     @user = current_user
     @favorites = Favorite.where(user_id: @user.id)
     @categories = Category.all
+
+    # if favorite.destroy
+    # redirect_to users_user_favorites_path
+    # end
   end
 
 

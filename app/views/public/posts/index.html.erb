@@ -1,5 +1,9 @@
 <h4>Public::Posts#index</h4>
 
+<%= link_to '新着順', posts_path %>
+<%= link_to '古い順', posts_path(sort: 'old') %>
+<%= link_to 'いいね順', posts_path(sort: 'good') %>
+
 <% @posts.each do |post| %>
 
   <%=time_ago_in_words(post.created_at)%>前
