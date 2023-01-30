@@ -1,0 +1,40 @@
+<h4>Admin::Posts#index</h4>
+
+<h3>〇〇の投稿一覧</h3>
+
+<% @posts.each do |post| %>
+
+
+    <%=time_ago_in_words(post.created_at)%>前
+    <%#= @post.created_at.strftime('%Y/%m/%d') %>
+    <%= post.user.name %><br>
+    <%= post.post_text %>
+    <% if post.image.attached? %>
+      <%= image_tag post.image, size: "70x70" %>
+    <% else %>
+      <%= image_tag 'no-image.jpg', size: "70x70" %>
+    <% end %>
+
+    <% unless current_user.nil? %>
+      <% if post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(post), method: :delete do %>
+            ♥<%= post.favorites.count %> いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to post_favorites_path(post), method: :post do %>
+            ♡<%= post.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% end %>
+    <% end %>
+
+    <% if !current_user %>
+      ♥<%= post.favorites.count %> いいね
+    <% end %>
+
+    <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
+
+  <% end %>
+

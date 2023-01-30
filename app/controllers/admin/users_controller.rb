@@ -18,6 +18,13 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(@user.id)#admin/user#showへ
   end
 
+  #is_unpermittedでアカウントを使えなくする
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy(is_unpermitted: true)
+    redirect_to admin_user_path(@user.id)#admin/user#showへ
+  end
+
 
   protected
 
