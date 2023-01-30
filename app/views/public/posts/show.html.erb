@@ -11,17 +11,27 @@
   <% end %>
 
 
-  <% if @post.favorited_by?(current_user) %>
-      <%= link_to post_favorites_path(@post.id), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(@post.id), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
+  <% unless current_user.nil? %>
+  <!--current_ureがnilでなければ＝current_userがあるなら、下が実装される-->
+  <!--つまり、ログインしていなければ（current_userがnilだったら、endで囲っている中をスルーする。自分がお気に入りにしてるか分からないので、いいね数を表示させない-->
+  <!--この記述いろんなところで使える-->
+    <% if @post.favorited_by?(current_user) %>
+        <%= link_to post_favorites_path(@post.id), method: :delete do %>
+          ♥<%= @post.favorites.count %> いいね
+        <% end %>
+      </p>
+      <% else %>
+      <p>
+        <%= link_to post_favorites_path(@post.id), method: :post do %>
+          ♡<%= @post.favorites.count %> いいね
+        <% end %>
+      </p>
+    <% end %>
+  <% end %>
+
+
+  <% if !current_user %>
+    ♥<%= @post.favorites.count %> いいね
   <% end %>
 
   <p>コメント件数：<%= @post.comments.count %></p>
@@ -41,17 +51,19 @@
       <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
       <!--(comment.post, comment)-->
       <!--post_comment DELETE /posts/:post_id/comments/:id(.:format)       public/comments#destroy-->
-      
     <% end %>
   <% end %>
 </div>
 
 <br>
 <div>
-  <!--コメント投稿フォーム-->
-  >> <%= @post.user.name %>さんの投稿にコメントする
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %><br>
-    <%= f.submit "コメントを投稿" %>
+  <% unless current_user.nil? %>
+  <!--ログインユーザーでなければ表示させない-->
+    <!--コメント投稿フォーム-->
+    >> <%= @post.user.name %>さんの投稿にコメントする
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %><br>
+      <%= f.submit "コメントを投稿" %>
+    <% end %>
   <% end %>
 </div>

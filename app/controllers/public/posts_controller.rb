@@ -1,7 +1,6 @@
 class Public::PostsController < ApplicationController
 
   def index
-
     if params[:category_id]
       post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
       # post_ids => [1,4]

@@ -50,28 +50,29 @@
 
       </div>
     </header>
+    
 
     <!--navbarの2段目、ドロップダウンメニュー-->
 
       <!--管理者がログインした時-->
       <% if admin_signed_in? %>
       <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--  <span class="navbar-toggler-icon"></span>-->
+        <!--</button>-->
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                会員一覧
+              <a class="nav-link">
+                <%= link_to "会員一覧", admin_users_path %>
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">
-                カテゴリー関連
+                <%= link_to "カテゴリー関連", admin_categories_path %>
               </a>
             </li>
 
@@ -138,10 +139,10 @@
             </li>
           </ul>
 
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <!--<form class="form-inline my-2 my-lg-0">-->
+          <!--  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+          <!--  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+          <!--</form>-->
 
         </div>
       </nav>
@@ -149,9 +150,38 @@
 
       <!--管理者と顧客がログインしていない時-->
       <% else %>
-        人気順
-        カテゴリー
-        検索窓
+        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <!--<li class="nav-item">-->
+            <!--  <a class="nav-link">-->
+            <!--    <%#= link_to "Top", posts_path, class: "link" %>-->
+            <!--  </a>-->
+            <!--</li>-->
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                並び替え
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item"><%= link_to '新着順', posts_path %></a>
+                <a class="dropdown-item"><%= link_to '古い順', posts_path(sort: 'old') %></a>
+                <a class="dropdown-item"><%= link_to 'いいね順', posts_path(sort: 'good') %></a>
+              </div>
+            </li>
+
+            <p>投稿・コメント・いいね機能を使いたい人は是非登録してね♪</p>
+
+            </li>
+          </ul>
+
+        </div>
+      </nav>
       <% end %>
 
     <!--nav-listの書き方参照する-->
