@@ -1,13 +1,13 @@
 class Admin::PostsController < ApplicationController
 
   def index
-    if params[:category_id]
-      post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
-      # post_ids => [1,4]
-      @posts = Post.where(id: post_ids)
-    else
-      @posts = Post.all
-    end
+    @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+
+    # if params[:category_id]
+    #   post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
+    #   # post_ids => [1,4]
+    #   @posts = @posts.where(id: post_ids)
+    # end
 
     case params[:sort]
     when 'good'
