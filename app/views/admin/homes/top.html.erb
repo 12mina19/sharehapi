@@ -1,2 +1,38 @@
 <h4>admin/homes#top</h4>
 
+<!--並び替えの切り替え土台-->
+<%#= link_to '新着順', posts_path %>
+<%#= link_to '古い順', posts_path(sort: 'old') %>
+<%#= link_to 'いいね順', posts_path(sort: 'good') %>
+
+  <% @posts.each do |post| %>
+
+    <%=time_ago_in_words(post.created_at)%>前
+    <%#= @post.created_at.strftime('%Y/%m/%d') %>
+    <%= post.user.name %><br>
+    <%= post.post_text %>
+    <% if post.image.attached? %>
+      <%= image_tag post.image, size: "70x70" %>
+    <% else %>
+      <%= image_tag 'no-image.jpg', size: "70x70" %>
+    <% end %>
+
+      <% if post.favorited_by?(current_user) %>
+          <%= link_to post_favorites_path(post), method: :delete do %>
+            ♥<%= post.favorites.count %> いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to post_favorites_path(post), method: :post do %>
+            ♡<%= post.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% end %>
+
+    <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
+
+    <%#= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+
+  <% end %>
+

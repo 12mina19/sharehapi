@@ -35,6 +35,8 @@
 
     <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
 
+    <%= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+
   <% end %>
 
 

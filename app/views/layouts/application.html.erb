@@ -22,6 +22,7 @@
  <body>
     <header>
       <div class="heading">
+        <nav class="navbar sticky-top navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #pink;">
         <!--サイトのロゴ-->
         <% if user_signed_in? %>
           <%= link_to posts_path do %>
@@ -47,16 +48,17 @@
           <%= link_to "ユーザー：ログイン", new_user_session_path %>
           <%= link_to "管理者：ログイン", new_admin_session_path %>
         <% end %>
-
+        
+        </nav>
       </div>
     </header>
-    
+
 
     <!--navbarの2段目、ドロップダウンメニュー-->
 
       <!--管理者がログインした時-->
       <% if admin_signed_in? %>
-      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+      <nav class="navbar sticky-top navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
         <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
         <!--  <span class="navbar-toggler-icon"></span>-->
         <!--</button>-->
@@ -75,7 +77,6 @@
                 <%= link_to "カテゴリー関連", admin_categories_path %>
               </a>
             </li>
-
           </ul>
 
         </div>
@@ -84,14 +85,16 @@
 
       <!--顧客がログインしている時-->
       <% elsif user_signed_in? %>
-      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+      <nav class="navbar sticky-top navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-
+          <!--<ul class="nav justify-content-center">-->
+            <!--どうしてこれで中央寄せにならない？-->
+            
             <!--<li class="nav-item">-->
             <!--  <a class="nav-link">-->
             <!--    <%#= link_to "Top", posts_path, class: "link" %>-->
@@ -150,7 +153,7 @@
 
       <!--管理者と顧客がログインしていない時-->
       <% else %>
-        <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
+        <nav class="navbar sticky-top navbar-icon-top navbar-expand-lg navbar-light" style="background-color: #ef857d;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

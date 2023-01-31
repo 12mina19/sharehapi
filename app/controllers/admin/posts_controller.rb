@@ -1,6 +1,7 @@
 class Admin::PostsController < ApplicationController
 
   def index
+    #特定のユーザーに絞る
     @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
 
     # if params[:category_id]
@@ -30,7 +31,19 @@ class Admin::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to admin_path
+    # admin/homes#topに遷移するのはエラーでなかった
 
+    # redirect_to admin_posts_path(user_id: params[:user_id])
+    # redirect_to admin_posts_path(params[:user_id])
+    # 2つだとadmin/post#indexで何も表示されなかった。
+
+    # redirect_to admin_post_path(params[:id])×(@post.id)×
+
+
+    #削除後、本当はadmin/users#showか#index（個別）のままがいいが、うまく遷移していない
   end
 
 
