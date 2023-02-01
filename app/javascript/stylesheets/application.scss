@@ -1,10 +1,36 @@
 // Bootstrap導入のために記述
 @import '~bootstrap/scss/bootstrap';
 
-// background: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);
-
-// background-color: linear-gradient( 135deg, #FFD3A5 10%, #FD6585 100%);
-
-header {
-  background-color: pink;
+/* ブラウザがそれぞれ持っているCSSをリセットするための記述 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+// ヘッダーの1段目
+// header {
+//   display: flex;
+//   align-items: center;
+//   height: 70px;
+//   background-color: pink;
+// }
+
+// .sign.log-btn {
+// 　text-align:right;
+// 　margin-right:20px;
+// }
+
+// .logo {
+//   text-align: center;
+// }
+
+// ナビバー（ヘッダー2段目）を中央寄せ（OK）
+.navbar-nav {
+  margin: 0 auto;
+}
+
+//リンクと位置があっていない
+// .dropdown-menu {
+//   margin: 0 auto;
+// }

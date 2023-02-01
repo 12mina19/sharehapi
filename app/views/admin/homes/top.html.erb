@@ -17,22 +17,12 @@
       <%= image_tag 'no-image.jpg', size: "70x70" %>
     <% end %>
 
-      <% if post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(post), method: :delete do %>
-            ♥<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to post_favorites_path(post), method: :post do %>
-            ♡<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% end %>
+    ♥<%= post.favorites.count %> いいね
+
 
     <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
 
-    <%#= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+    <%= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
 
   <% end %>
 
