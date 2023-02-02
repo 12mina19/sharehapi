@@ -1,6 +1,10 @@
 // Bootstrap導入のために記述
 @import '~bootstrap/scss/bootstrap';
 
+// fontawesome導入のために記述
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+
 /* ブラウザがそれぞれ持っているCSSをリセットするための記述 */
 * {
   margin: 0;
@@ -8,29 +12,17 @@
   box-sizing: border-box;
 }
 
-// ヘッダーの1段目
-// header {
-//   display: flex;
-//   align-items: center;
-//   height: 70px;
-//   background-color: pink;
-// }
-
-// .sign.log-btn {
-// 　text-align:right;
-// 　margin-right:20px;
-// }
-
-// .logo {
-//   text-align: center;
-// }
-
-// ナビバー（ヘッダー2段目）を中央寄せ（OK）
+// ナビバー(ヘッダー2段目)を中央寄せ
 .navbar-nav {
   margin: 0 auto;
 }
 
-//リンクと位置があっていない
-// .dropdown-menu {
-//   margin: 0 auto;
-// }
+
+// ナビバー(ヘッダー2段目)の位置を調整
+.dropdown-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  // 0%のときはちょうど真ん中。位置調整したいときにこれを使うと便利。
+  text-align: center;
+}
