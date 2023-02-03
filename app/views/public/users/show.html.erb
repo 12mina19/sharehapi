@@ -1,15 +1,24 @@
+<!--<h4>public/users#show</h4>-->
+
 <div class="container-fluid">
-  
-  <h4>public/users#show</h4>
-  <h2>my登録情報確認</h2>
-  
-  <!--まず、ここに情報が出るようにしてみて、その後、実際にログインしてみてエラーが出ないか確認する-->
-  
-  <label>名前（ニックネーム）</label>
-  <%= @user.name %><br>
-  <label>メールアドレス</label>
-  <%= @user.email %><br>
-  
-  <%= link_to "編集する", users_information_edit_path %>
-  
+  <div class="mt-4">
+
+  <center>
+    <h4>my登録情報確認</h4>
+
+    <table border="1" style="border-collapse: collapse">
+      <tr>
+        <th style="font-size:12px">名前</th>
+        <td width="250"><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th style="font-size:12px">メールアドレス</th>
+        <td width="250"><%= @user.email %></td>
+      </tr>
+    </table>
+
+    <%= link_to "編集する", users_information_edit_path, class: "btn btn-primary mt-3 mb-5 btn-sm" %></td>
+  </center>
+
+ </div>
 </div>

@@ -56,13 +56,6 @@ class Public::SessionsController < Devise::SessionsController
 
   # 管理者に利用停止にされた人(is_unpermitted：True)がログインできないようにしたい。
   #admin/users_controllerで、アカウント削除してみたが、ちゃんと実装できていない。
-  
-  # def unpermit_state
-  #   @user = User.find_by(email: params[:user][:email])
-  #   return if !@user
-  #   if @user.valid_password?(params[:user][:password]) && @user.is_unpermit == true
-  #   redirect_to topページへ
-  #   end
-  # end
+  #退会みたいに論理削除にはしていない。完全削除でいいと思っているけど、消せていない。。明日ターミナル確認する。
 
 end
