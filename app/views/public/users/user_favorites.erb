@@ -1,5 +1,7 @@
 <h4>public/users#favorites</h4>
 
+<h4>myいいね一覧</h4>
+
 <% @favorites.each do |favorite|%>
   <%= time_ago_in_words(favorite.post.created_at)%>前
   <%= favorite.post.user.name %>

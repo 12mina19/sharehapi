@@ -1,43 +1,64 @@
 <h4>Public::Posts#index</h4>
 
-<!--並び替えの切り替え土台-->
-<%#= link_to '新着順', posts_path %>
-<%#= link_to '古い順', posts_path(sort: 'old') %>
-<%#= link_to 'いいね順', posts_path(sort: 'good') %>
 
-  <% @posts.each do |post| %>
+<div class="container-fluid">
+  <div class="mt-2">
+    <!--<div class="post_index">-->
 
-    <%=time_ago_in_words(post.created_at)%>前
-    <%#= @post.created_at.strftime('%Y/%m/%d') %>
-    <%= post.user.name %><br>
-    <%= post.post_text %>
-    <% if post.image.attached? %>
-      <%= image_tag post.image, size: "70x70" %>
-    <% else %>
-      <%= image_tag 'no-image.jpg', size: "70x70" %>
-    <% end %>
+    <div class="text-center">
+      <div class="mb-3">
+        <%= link_to '新着順', posts_path %>
+        <%= link_to '古い順', posts_path(sort: 'old') %>
+        <%= link_to 'いいね順', posts_path(sort: 'good') %>
+      </div>
 
-    <% unless current_user.nil? %>
-      <% if post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(post), method: :delete do %>
-            ♥<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
-        <% else %>
-        <p>
-          <%= link_to post_favorites_path(post), method: :post do %>
-            ♡<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
+
+      <% @posts.each do |post| %>
+        <div class="row">
+          <div class="col-5">
+            <%=time_ago_in_words(post.created_at)%>前
+            <%#= @post.created_at.strftime('%Y/%m/%d') %>
+            <%= post.user.name %><br>
+            <%= post.post_text %><br>
+
+            <% unless current_user.nil? %>
+              <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorites_path(post), method: :delete do %>
+                    ♥<%= post.favorites.count %> いいね
+                  <% end %>
+                <!--</p>-->
+                <% else %>
+                <!--<p>-->
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    ♡<%= post.favorites.count %> いいね
+                  <% end %>
+                <!--</p>-->
+              <% end %>
+            <% end %>
+
+            <% if !current_user %>
+              ♥<%= post.favorites.count %> いいね
+            <% end %>
+
+            <span>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></span>
+          </div>
+
+
+          <div class="col-2">
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "80x100" %>
+            <% else %>
+              <%= image_tag 'no-image.jpg', size: "80x100" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="border-bottom"></div>
+        <!--rowの中の一番下に書いてみたら、全く線は表示されなかった-->
       <% end %>
-    <% end %>
 
-    <% if !current_user %>
-      ♥<%= post.favorites.count %> いいね
-    <% end %>
-
-    <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
-
-  <% end %>
+    </div>
+  </div>
+</div>
 
   <%= link_to "新規投稿", new_post_path %>

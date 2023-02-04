@@ -1,5 +1,11 @@
 <h4>public/users#user_index</h4>
 
+<h4>my投稿一覧</h4>
+
+<%= link_to '新着順', users_user_index_path %></a>
+<%= link_to '古い順', users_user_index_path(sort: 'old') %></a>
+<%= link_to 'いいね順', users_user_index_path(sort: 'good') %></a>
+
 <% @posts.each do |post| %>
 
   <%=time_ago_in_words(post.created_at)%>前

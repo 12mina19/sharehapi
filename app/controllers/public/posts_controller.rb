@@ -5,10 +5,13 @@ class Public::PostsController < ApplicationController
       post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
       # post_ids => [1,4]
       @posts = Post.where(id: post_ids)
+      #該当するcategoryの投稿を抽出
     else
       @posts = Post.all
+      #全ユーザーの投稿
     end
 
+    #上で絞ったやつにsortかける。あれ？でもカテゴリーは並び変わらない…
     case params[:sort]
     when 'good'
       @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
@@ -18,10 +21,7 @@ class Public::PostsController < ApplicationController
       @posts = @posts.order(created_at: :desc)
     end
 
-    #@posts = Post.where(id: params[:category_id]).order(created_at: :desc)
-    #@posts = Post.category(params[:category_id]).order(created_at: :desc)
-
-    @categories = Category.all
+    @categories = Category.all#この位置は影響ある…？
     @comments = Comment.all
   end
 
