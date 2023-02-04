@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
 
-  #Categoryモデル(1)とpostモデル(N)の関連付け
-  has_many :posts, dependent: :destroy
+  has_many :post_categories, dependent: :destroy
+  has_many :posts, through: :post_categories
 
 end

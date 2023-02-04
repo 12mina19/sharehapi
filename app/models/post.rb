@@ -1,9 +1,13 @@
 class Post < ApplicationRecord
   has_one_attached :image
 
-  #post_category(中間テーブル)作成後、編集
+  #post_category作成後、編集(複数選択出来るように中間テーブルを作成)
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
+  #※中間テーブルがあるときはthrough:：(中間テーブル)を通して、情報を取りに行くイメージ
+  #その際は、カテゴリーが紐付いた投稿は消さないように、dependentは記述しない。
+  #このやり方で、カテゴリーは消えるが、それに紐付いた投稿は残るようになる。
+
 
   belongs_to :user
 
