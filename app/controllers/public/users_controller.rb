@@ -54,7 +54,7 @@ class Public::UsersController < ApplicationController
       @posts = Post.where(id: post_ids)
     else
       @posts = @user.posts
-      # ここ修正した
+      #@posts = Post.allを上記のように書き換えることによって、@user(current_user)のPostsにしぼってる
     end
 
     case params[:sort]
