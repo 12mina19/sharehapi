@@ -17,12 +17,49 @@
   margin: 0 auto;
 }
 
-
 // ナビバー(ヘッダー2段目)の位置を調整
 .dropdown-menu {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  // 0%のときはちょうど真ん中。位置調整したいときにこれを使うと便利。
+  // 0%のときはちょうど真ん中。位置調整したいときにこれを使うと便利
   text-align: center;
 }
+
+// public/user#edit
+// ※labelはhtmlだけでは横幅変えられないためCSSで調整
+label[for="inputName"] {
+  display: inline-block;
+  width: 120px;
+}
+
+// public/user#edit
+label[for="email"] {
+  display: inline-block;
+  width: 120px;
+}
+
+// admin/users#edit
+label[for="id/admin"] {
+  display: inline-block;
+  width: 120px;
+}
+
+label[for="inputName/admin"] {
+  display: inline-block;
+  width: 120px;
+}
+
+label[for="email/admin"] {
+  display: inline-block;
+  width: 120px;
+}
+
+// うまくいかなかったやつ
+// .center_box {
+// text-align: center;
+// }
+// .center_box p {
+// display: inline-block;
+// text-align: left;
+// }
