@@ -37,17 +37,43 @@ class Public::UsersController < ApplicationController
   end
 
   #ログインユーザーのみの投稿一覧
+  # def user_index
+  #   @user = current_user
+  #   @posts = @user.posts
+  #   @categories = Category.all
+  # end
+
   def user_index
     @user = current_user
-    @posts = @user.posts
     @categories = Category.all
+    @comments = Comment.all
+
+    if params[:category_id]
+      post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
+      # post_ids => [1,4]
+      @posts = Post.where(id: post_ids)
+    else
+      @posts = @user.posts
+      # ここ修正した
+    end
+
+    case params[:sort]
+    when 'good'
+      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+    when 'old'
+      @posts = @posts.order(created_at: :asc)
+    else
+      @posts = @posts.order(created_at: :desc)
+    end
+
   end
+
 
   #ログインユーザーの投稿削除機能
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to user_user_index_path
+    redirect_to users_user_index_path
     #user_indexの時点でログインユーザー（投稿者）のみの表示にしてあるため、ここのアクション・Viewでは特に制限かけていない。
   end
 
