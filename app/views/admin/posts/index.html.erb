@@ -1,44 +1,70 @@
 <h4>Admin::Posts#index</h4>
 
-<h3><%= @user.name %>の投稿一覧</h3>
-<!--@userの前にPostをつけるとNoMethodError in Admin::Posts#index　undefined method `user'-->
+<div class="container-fluid">
+  <dic class="mt-2">
+    <div class="text-center">
+      <h3><%= @user.name %>の投稿一覧</h3>
+        <!--@userの前にPostをつけるとNoMethodError in Admin::Posts#index　undefined method `user'-->
+        <!--コントローラーに@user = User.find(params[:user_id])追記-->
+      </div>
 
  <% @posts.each do |post| %>
+   <div class="row">
+     <div class="col-5 offset-3 border-bottom">
+        <div class="row">
+          <div class="col-4">
+            <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
+          </div>
+          <div class="col-6">
+            <%= post.user.name %>
+          </div>
+        </div>
+        <div class="row">
+          <%= post.post_text %>
+        </div>
 
-    <%=time_ago_in_words(post.created_at)%>前
-    <%#= @post.created_at.strftime('%Y/%m/%d') %>
-    <%= post.user.name %><br>
-    <%= post.post_text %>
-    <% if post.image.attached? %>
-      <%= image_tag post.image, size: "70x70" %>
-    <% else %>
-      <%= image_tag 'no-image.jpg', size: "70x70" %>
-    <% end %>
+        <div class="row">
+          <div class="col-3">
+            <% unless current_user.nil? %>
+              <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorites_path(post), method: :delete do %>
+                    <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    <span style="font-size:13px;">♡<%= post.favorites.count %> いいね</span>
+                  <% end %>
+              <% end %>
+            <% end %>
 
-    <% unless current_user.nil? %>
-      <% if post.favorited_by?(current_user) %>
-          <%= link_to post_favorites_path(post), method: :delete do %>
-            ♥<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
+            <% if !current_user %>
+              <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
+            <% end %>
+          </div>
+
+          <div class="col-4">
+            <span style="font-size:13px;">
+              コメント件数：<%= link_to post.comments.count, post_path(post.id) %>
+            </span>
+          </div>
+
+          <div class="col-4">
+            <span style="font-size:13px;">
+              <%= link_to "管理者用：削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-1 border-bottom">
+        <% if post.image.attached? %>
+          <%= image_tag post.image, size: "70x70" %>
         <% else %>
-        <p>
-          <%= link_to post_favorites_path(post), method: :post do %>
-            ♡<%= post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% end %>
-    <% end %>
-
-    <% if !current_user %>
-      ♥<%= post.favorites.count %> いいね
-    <% end %>
-
-    <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
-
-    <%= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-
+          <%= image_tag 'no-image.jpg', size: "70x70" %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 
-
-
+  </div>
+</div>
