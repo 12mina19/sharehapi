@@ -1,31 +1,53 @@
 <h4>public/users#favorites</h4>
 
-<h4>myいいね一覧</h4>
+<div class="container-fluid">
+  <dic class="mt-2">
+    <div class="text-center">
+      <h4>myいいね一覧</h4>
+    </div>
 
-<% @favorites.each do |favorite|%>
-  <%= time_ago_in_words(favorite.post.created_at)%>前
-  <%= favorite.post.user.name %>
+    <% @favorites.each do |favorite|%>
+    <div class="row">
+      <div class="col-5 offset-3 border-bottom">
+        <div class="row">
+          <div class="col-4">
+            <span style="font-size:13px;"><%= time_ago_in_words(favorite.post.created_at)%>前</span>
+          </div>
+          <div class="col-6">
+            <%= favorite.post.user.name %>
+          </div>
+        </div>
+        <div class="row">
+          <%= favorite.post.post_text %>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <% if favorite.post.favorited_by?(current_user) %>
+              <%= link_to post_favorites_path(favorite.post, ref: 'favorite'), method: :delete do %>
+                <span style="font-size:13px;">♥<%= favorite.post.favorites.count %> いいね</span>
+                <% end %>
+              <% else %>
+                <%= link_to post_favorites_path(favorite.post), method: :post do %>
+                <span style="font-size:13px;">♡<%= favorite.post.favorites.count %> いいね</span>
+                <% end %>
+            <% end %>
+          </div>
+          <div class="col-4">
+            <span style="font-size:13px;">
+              コメント件数：<%= link_to favorite.post.comments.count, post_path(favorite.post.id) %>
+            </span>
+          </div>
+        </div>
+      </div>
 
-  <%= favorite.post.post_text %>
-  <% if favorite.post.image.attached? %>
-    <%= image_tag favorite.post.image, size: "70x70" %><br>
-  <% else %>
-    <%= image_tag 'no-image.jpg', size: "70x70" %><br>
-  <% end %>
-
-
-<% if favorite.post.favorited_by?(current_user) %>
-      <%= link_to post_favorites_path(favorite.post, ref: 'favorite'), method: :delete do %>
-       ♥<%= favorite.post.favorites.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(favorite.post), method: :post do %>
-        ♡<%= favorite.post.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-
-  <p>コメント件数：<%= link_to favorite.post.comments.count, post_path(favorite.post.id) %></p>
-<% end %>
+        <div class="col-1 border-bottom">
+          <% if favorite.post.image.attached? %>
+            <%= image_tag favorite.post.image, size: "70x90" %>
+          <% else %>
+            <%= image_tag 'no-image.jpg', size: "70x90" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

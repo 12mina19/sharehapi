@@ -7,20 +7,21 @@
   <div class="mt-2">
 
     <div class="text-center">
-      <div class="mb-3">
-        <%= link_to '新着順', posts_path %>
-        <%= link_to '古い順', posts_path(sort: 'old') %>
-        <%= link_to 'いいね順', posts_path(sort: 'good') %>
+      <div class="col-6 offset-3 border-bottom">
+        <%= link_to '新着順', posts_path(category_id: @category) %>
+        <%= link_to '古い順', posts_path(category_id: @category, sort: 'old') %>
+        <%= link_to 'いいね順', posts_path(category_id: @category, sort: 'good') %>
       </div>
+    </div>
 
 
       <% @posts.each do |post| %>
         <div class="row">
           <div class="col-5 offset-3 border-bottom">
-          <!--offsetの意味は左側をあけるという意味（今回はcol3個分）-->
+          <!--offsetの意味は左側をあけるという意味（今回はcol-3個分）-->
             <div class="row">
-              <div class="col-6">
-                <%=time_ago_in_words(post.created_at)%>前
+              <div class="col-4">
+                <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
                 <%#= @post.created_at.strftime('%Y/%m/%d') %>
               </div>
               <div class="col-6">
@@ -31,17 +32,17 @@
               <%= post.post_text %><br>
             </div>
             <div class="row">
-              <div class="col-6">
+              <div class="col-4">
                 <% unless current_user.nil? %>
                   <% if post.favorited_by?(current_user) %>
                       <%= link_to post_favorites_path(post), method: :delete do %>
-                        ♥<%= post.favorites.count %> いいね
+                        <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
                       <% end %>
                     <!--</p>-->
                     <% else %>
                     <!--<p>-->
                       <%= link_to post_favorites_path(post), method: :post do %>
-                        ♡<%= post.favorites.count %> いいね
+                        <span style="font-size:13px;">♡<%= post.favorites.count %> いいね</span>
                       <% end %>
                     <!--</p>-->
                   <% end %>
@@ -52,13 +53,13 @@
                 <% end %>
               </div>
               <div class="col-6">
-                コメント件数：<%= link_to post.comments.count, post_path(post.id) %>
+                <span style="font-size:13px;">コメント件数：<%= link_to post.comments.count, post_path(post.id) %></span>
               </div>
             </div>
           </div>
 
 
-          <div class="col-2 border-bottom">
+          <div class="col-1 border-bottom">
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "80x100" %>
             <% else %>
@@ -71,7 +72,7 @@
         <!--rowの中の一番下に書いてみたら、全く線は表示されなかった-->
       <% end %>
 
-    </div>
+    <!--</div>-->
   </div>
 </div>
 

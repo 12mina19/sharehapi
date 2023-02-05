@@ -1,11 +1,7 @@
 <h4>Admin::Posts#index</h4>
 
 <h3><%= @user.name %>の投稿一覧</h3>
-<!--これだとNoMethodError in Admin::Posts#index　undefined method `user'-->
-
-<h3><%#= @post.user.name %></h3>
-
-
+<!--@userの前にPostをつけるとNoMethodError in Admin::Posts#index　undefined method `user'-->
 
  <% @posts.each do |post| %>
 

@@ -5,6 +5,11 @@ class Public::SessionsController < Devise::SessionsController
   #退会していなかった場合,createアクション（顧客のログイン機能）を実行させる
   before_action :user_state, only: [:create]
 
+  #利用停止機能
+  before_action :unpermitted, only: [:create]
+
+
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -13,9 +18,14 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
+  #このcreateはログインすることを指す
+  #ここのcreateアクションの前（before_action)で利用停止のユーザーを確認する
+  #すごい細かいことを突き詰めると、管理者が利用停止にした瞬間、もしユーザがログインしたら、少しの間サイトを使えてしまう。
+  #それを回避する方法もあるが、今は難しすぎる為やらない。
+
 
   # DELETE /resource/sign_out
   # def destroy
@@ -45,6 +55,7 @@ class Public::SessionsController < Devise::SessionsController
     #.valid_password?…　「？」があるメソッドは、自動的にtrueとfalseが認識される。だからあえて＝＝trueなどを書く必要はない
     #.valid_password?の部分が、trueでもfalseでも、「.is_deleted == true」の場合は新規登録に戻る必要がある。
     redirect_to new_user_registration_path
+    #public/registrations#new 新規投稿画面へ
     end
   end
 
@@ -54,8 +65,13 @@ class Public::SessionsController < Devise::SessionsController
     #   <処理手順>
 
 
-  # 管理者に利用停止にされた人(is_unpermitted：True)がログインできないようにしたい。
-  #admin/users_controllerで、アカウント削除してみたが、ちゃんと実装できていない。
-  #退会みたいに論理削除にはしていない。完全削除でいいと思っているけど、消せていない。。明日ターミナル確認する。
-
+  # 管理者に利用停止にされた人(is_unpermitted：True)がログインできないようにする。
+  def unpermitted
+    @user = User.find_by(email: params[:user][:email])
+    return if @user.blank?
+    if @user.valid_password?(params[:user][:password]) && @user.is_unpermitted == true
+    redirect_to new_user_registration_path  #public/registrations#new 新規投稿画面へ
+    #ここでエラー文でるようにしてあげる。
+    end
+  end
 end

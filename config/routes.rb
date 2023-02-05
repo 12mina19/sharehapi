@@ -38,7 +38,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   #【admin/homesコントローラ】
   namespace :admin do
     get '/' => 'homes#top'

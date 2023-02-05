@@ -149,14 +149,20 @@
                 <i class="fas fa-sort-amount-down"></i> 並び替え
               </a>
 
-              <!--【public/posts#index】-->
+              <!--【public/posts#index】全ユーザーの投稿一覧-->
               <% if current_page?(posts_path) %>
               <!--今いるページが（〇〇_path）なら、下記のpathにとぶよ！という分岐-->
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item"><%= link_to '新着順', posts_path %></a>
+                <a class="dropdown-item"><%= link_to '新着順', posts_path() %></a>
                 <a class="dropdown-item"><%= link_to '古い順', posts_path(sort: 'old') %></a>
                 <a class="dropdown-item"><%= link_to 'いいね順', posts_path(sort: 'good') %></a>
               </div>
+
+
+              <!--【public/posts#index】全ユーザーのカテゴリー別一覧-->
+              <!--ここに書こうとしてみたが、user_indexと違って、Viewがない…-->
+
+
               <!--【public/users#user_index】-->
               <% elsif current_page?(users_user_index_path) %>
               <!--ここはelseのうしろに条件書きたいからelsif。elseでも大丈夫そうだけど…とメンターは言っていた-->

@@ -4,6 +4,7 @@ class Public::PostsController < ApplicationController
     if params[:category_id]
       post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
       # post_ids => [1,4]
+      @category = params[:category_id]
       @posts = Post.where(id: post_ids)
       #該当するcategoryの投稿を抽出
     else
@@ -14,7 +15,13 @@ class Public::PostsController < ApplicationController
     #上で絞ったやつにsortかける。あれ？でもカテゴリーは並び変わらない…
     case params[:sort]
     when 'good'
-      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      @posts = @posts.left_joins(:favorites).group(:post_id).order("count(post_id) desc")
+      # 投稿に結びついているいいねを抽出して、並び替えしてる
+      # roup：指定したカラムのレコードの種類ごとにデータをまとめるメソッド
+      # 内部結合(join)：AとBのテーブル両方に同じIDがあったら、抽出される
+      # 外部結合(left_joins)：基準となるテーブルに存在すれば、両方のテーブルになくても抽出される
+      # 最初joinしか記載していなかった為、いいね順で「いいね0」の時、表示されていなかった。
+      # そこで、left_joinsに記載を変更したところ、「いいね0」の時でも表示された。
     when 'old'
       @posts = @posts.order(created_at: :asc)
     else

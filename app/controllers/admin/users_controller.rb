@@ -18,12 +18,16 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(@user.id)#admin/user#showへ
   end
 
-  #is_unpermittedでアカウントを使えなくする(アカウント削除)
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy(is_unpermitted: true)
-    redirect_to admin_user_path(@user.id)#admin/user#showへ
-  end
+
+
+  #destroyじゃなくて退会処理みたいにできないか？
+  # def unpermitted
+  #   @user = User.find(params[:id])
+  #   @user.update(is_unpermitted: true)
+  #   reset_session
+  #   redirect_to admin_user_path(@user.id)#admin/user#showへ
+  # end
+
 
 
   protected

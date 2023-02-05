@@ -3,16 +3,8 @@ class Admin::PostsController < ApplicationController
   def index
     #特定のユーザーに絞る
     @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+     #↑この一行だけだとエラー(NoMethodError in Admin::Posts#index　undefined method `user')が出たため追記
     @user = User.find(params[:user_id])
-    #エラーが出たため追記してみた
-    # @post = Post.find(params[:id])
-    # @post = Post.find(user_id: params[:id])
-
-    # if params[:category_id]
-    #   post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
-    #   # post_ids => [1,4]
-    #   @posts = @posts.where(id: post_ids)
-    # end
 
     case params[:sort]
     when 'good'

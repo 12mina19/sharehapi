@@ -1,46 +1,69 @@
 <h4>public/users#user_index</h4>
 
-<h4>my投稿一覧</h4>
+<div class="container-fluid">
+  <dic class="mt-2">
 
-<%= link_to '新着順', users_user_index_path %></a>
-<%= link_to '古い順', users_user_index_path(sort: 'old') %></a>
-<%= link_to 'いいね順', users_user_index_path(sort: 'good') %></a>
+    <div class="text-center">
+      <div class="col-6 offset-3 border-bottom">
+        <h4>my投稿一覧</h4>
+          <%= link_to '新着順', users_user_index_path %>
+          <%= link_to '古い順', users_user_index_path(sort: 'old') %>
+          <%= link_to 'いいね順', users_user_index_path(sort: 'good') %>
+      </div>
+    </div>
 
-<% @posts.each do |post| %>
+      <% @posts.each do |post| %>
+        <div class="row">
+          <div class="col-5 offset-3 border-bottom">
+            <div class="row">
+              <div class="col-4">
+                <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
+                <%#= @post.created_at.strftime('%Y/%m/%d') %>
+              </div>
+              <div class="col-6">
+                <%= post.user.name %><br>
+              </div>
+            </div>
+            <div class="row">
+              <%= post.post_text %>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorites_path(post), method: :delete do %>
+                    <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    <span style="font-size:13px;">♡ <span style="font-size:13px;">いいね</span>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="col-4">
+                <span style="font-size:13px;">
+                  コメント件数：<%= link_to post.comments.count, post_path(post.id) %>
+                <span style="font-size:13px;">
+              </div>
+              <div class="col-4">
+                <td>
+                  <span style="font-size:13px;">
+                  <!-- color:red;　ここで色変えられなかった-->
+                    <%= link_to "投稿削除", destroy_user_post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
+                  </span>
+                </td>
+              </div>
+            </div>
+          </div>
 
-  <%=time_ago_in_words(post.created_at)%>前
-  <%#= @post.created_at.strftime('%Y/%m/%d') %>
-  <%= post.user.name %><br>
-
-
-  <%= post.post_text %>
-  <% if post.image.attached? %>
-    <%= image_tag post.image, size: "70x70" %>
-  <% else %>
-    <%= image_tag 'no-image.jpg', size: "70x70" %>
-  <% end %>
-
-
-  <% if post.favorited_by?(current_user) %>
-      <%= link_to post_favorites_path(post), method: :delete do %>
-        ♥<%= post.favorites.count %> いいね
+          <div class="col-1 border-bottom">
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "70x90" %>
+            <% else %>
+              <%= image_tag 'no-image.jpg', size: "70x90" %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorites_path(post), method: :post do %>
-        ♡<%= post.favorites.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
 
-  <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
-
-  <%#= link_to "投稿削除", user_destroy_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <%# if post.user == current_user %>
-    <td>
-    <%= link_to "投稿削除", destroy_user_post_path(post.id), method: :delete, "data-confirm" => "本当に消しますか？" %><br>
-    </td>
-  <%# end %>
-
-<% end %>
+  </div>
+</div>

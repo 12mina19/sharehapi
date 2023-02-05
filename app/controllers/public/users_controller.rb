@@ -33,7 +33,7 @@ class Public::UsersController < ApplicationController
     reset_session #この記述で現在のログイン状況をリセットする（destroyではない）
     flash[:notice] = "退会が完了しました。"
     redirect_to root_path #処理完了後ルートパスへ遷移
-    #rootページにフラッシュメッセージの<%= notice %>を設置してみたが果たしてちゃんと処理されているだろうか…？？？
+    #rootページにフラッシュメッセージの<%= notice %>を設置してみたが果たしてちゃんと処理されているだろうか…？？？後で確認する
   end
 
   #ログインユーザーのみの投稿一覧
