@@ -1,69 +1,104 @@
-<h2>Public::Posts#show（コメント投稿画面）</h2>
+<h4>Public::Posts#show（コメント投稿画面）</h4>
 
-  <%=time_ago_in_words(@post.created_at)%>前
-  <%#= @post.created_at.strftime('%Y/%m/%d') %>
-  <%= @post.user.name %><br>
-  <%= @post.post_text %>
-  <% if @post.image.attached? %>
-    <%= image_tag @post.image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no-image.jpg', size: "100x100" %>
-  <% end %>
+<div class="container-fluid">
+  <dic class="mt-2">
+
+    <div class="row">
+      <div class="col-5 offset-3 border-bottom">
+        <div class="row">
+          <div class="col-4">
+            <span style="font-size:13px;"><%=time_ago_in_words(@post.created_at)%>前</span>
+          </div>
+          <div class="col-6">
+            <%= @post.user.name %>
+          </div>
+        </div>
+        <div class="row">
+          <%= @post.post_text %>
+        </div>
+
+      <div class="row">
+        <div class="col-3">
+          <% unless current_user.nil? %>
+          <!--current_ureがnilでなければ＝current_userがあるなら、下が実装される-->
+          <!--つまり、ログインしていなければ（current_userがnilだったら、endで囲っている中をスルーする。自分がお気に入りにしてるか分からないので、いいね数を表示させない-->
+          <!--この記述いろんなところで使える-->
+            <% if @post.favorited_by?(current_user) %>
+                <%= link_to post_favorites_path(@post.id), method: :delete do %>
+                  <span style="font-size:13px;">♥<%= @post.favorites.count %> いいね</span>
+                <% end %>
+              <% else %>
+                <%= link_to post_favorites_path(@post.id), method: :post do %>
+                  <span style="font-size:13px;">♡<%= @post.favorites.count %> いいね</span>
+                <% end %>
+            <% end %>
+          <% end %>
+
+          <% if !current_user %>
+            <span style="font-size:13px;">♥<%= @post.favorites.count %> いいね</span>
+          <% end %>
+        </div>
+
+        <div class="col-4">
+          <span style="font-size:13px;">
+            コメント件数：<%= @post.comments.count %>
+          </span>
+        </div>
+      </div>
+    </div>
+
+        <div class="col-1 border-bottom">
+          <% if @post.image.attached? %>
+            <%= image_tag @post.image, size: "90x110" %>
+          <% else %>
+            <%= image_tag 'no-image.jpg', size: "90x110" %>
+          <% end %>
+        </div>
+
+    </div>
 
 
-  <% unless current_user.nil? %>
-  <!--current_ureがnilでなければ＝current_userがあるなら、下が実装される-->
-  <!--つまり、ログインしていなければ（current_userがnilだったら、endで囲っている中をスルーする。自分がお気に入りにしてるか分からないので、いいね数を表示させない-->
-  <!--この記述いろんなところで使える-->
-    <% if @post.favorited_by?(current_user) %>
-        <%= link_to post_favorites_path(@post.id), method: :delete do %>
-          ♥<%= @post.favorites.count %> いいね
-        <% end %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to post_favorites_path(@post.id), method: :post do %>
-          ♡<%= @post.favorites.count %> いいね
-        <% end %>
-      </p>
-    <% end %>
-  <% end %>
+        <!--投稿されたコメントを表示-->
+        <div class="row">
+          <div class="col-5 offset-3 border-bottom">
 
+          <% @post.comments.each do |comment| %>
+            <div class="row">
+              <div class="col-4">
+                <span style="font-size:13px;"><%=time_ago_in_words(@post.created_at)%>前</span>
+              </div>
+              <div class="col-6">
+                <%= comment.user.name %>
+              </div>
+            </div>
 
-  <% if !current_user %>
-    ♥<%= @post.favorites.count %> いいね
-  <% end %>
+            <div class="row border-bottom">
+              <%= comment.comment %>
+            <!--<div class="row">-->
+              <% if comment.user == current_user %>
+                <%#メシテロ参照= link_to "削除", post_comment_path(post_comment.post_image, post_comment), method: :delete %>
+                  <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+                <!--(comment.post, comment)-->
+                <!--post_comment DELETE /posts/:post_id/comments/:id(.:format)     public/comments#destroy-->
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
-  <p>コメント件数：<%= @post.comments.count %></p>
+        <div class="row">
+          <div class="col-5 offset-3 border-bottom mt-3">
+            <% unless current_user.nil? %>
+            <!--ログインユーザーでなければ表示させない-->
+              <!--コメント投稿フォーム-->
+              >> <%= @post.user.name %>さんの投稿にコメントする
+              <%= form_with model: [@post, @comment] do |f| %>
+                <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに", size: "50x3" %><br>
+                <%= f.submit "コメントを投稿", class: "btn btn-primary mt-2 btn-sm" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
 
-
-
-<div>
-  <!--投稿されたコメントを表示-->
-  <% @post.comments.each do |comment| %>
-    <%= comment.user.name %>
-    <%#= comment.created_at.strftime('%Y/%m/%d') %>
-    <%=time_ago_in_words(@post.created_at)%>前
-    <%= comment.comment %>
-
-    <% if comment.user == current_user %>
-      <%#メシテロ参照= link_to "削除", post_comment_path(post_comment.post_image, post_comment), method: :delete %>
-      <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-      <!--(comment.post, comment)-->
-      <!--post_comment DELETE /posts/:post_id/comments/:id(.:format)       public/comments#destroy-->
-    <% end %>
-  <% end %>
-</div>
-
-<br>
-<div>
-  <% unless current_user.nil? %>
-  <!--ログインユーザーでなければ表示させない-->
-    <!--コメント投稿フォーム-->
-    >> <%= @post.user.name %>さんの投稿にコメントする
-    <%= form_with model: [@post, @comment] do |f| %>
-      <%= f.text_area :comment, rows: '3', placeholder: "コメントをここに" %><br>
-      <%= f.submit "コメントを投稿" %>
-    <% end %>
-  <% end %>
+  </div>
 </div>
