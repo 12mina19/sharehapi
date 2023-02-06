@@ -5,24 +5,47 @@
 <%#= link_to '古い順', posts_path(sort: 'old') %>
 <%#= link_to 'いいね順', posts_path(sort: 'good') %>
 
-  <% @posts.each do |post| %>
 
-    <%=time_ago_in_words(post.created_at)%>前
-    <%#= @post.created_at.strftime('%Y/%m/%d') %>
-    <%= post.user.name %><br>
-    <%= post.post_text %>
-    <% if post.image.attached? %>
-      <%= image_tag post.image, size: "70x70" %>
-    <% else %>
-      <%= image_tag 'no-image.jpg', size: "70x70" %>
+<div class="container-fluid">
+  <dic class="mt-2">
+
+    <% @posts.each do |post| %>
+      <div class="row">
+        <div class="col-4 offset-4 border-bottom">
+          <div class="row">
+            <div class="col-4">
+              <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
+            </div>
+            <div class="col-6">
+              <%= link_to post.user.name, admin_user_path(post.user.id) %>
+            </div>
+          </div>
+          <div class="row">
+            <%= post.post_text %>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
+            </div>
+            <div class="col-4">
+              <span style="font-size:13px;">
+                コメント件数：<%= link_to post.comments.count, post_path(post.id) %>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-1 border-bottom">
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "70x90" %>
+          <% else %>
+            <%= image_tag 'no-image.jpg', size: "70x90" %>
+          <% end %>
+        </div>
+      </div>
     <% end %>
 
-    ♥<%= post.favorites.count %> いいね
 
-
-    <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
-
-    <%= link_to "投稿削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-
-  <% end %>
-
+  </div>
+</div>
