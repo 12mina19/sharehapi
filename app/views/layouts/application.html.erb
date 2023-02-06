@@ -20,7 +20,8 @@
 
 
  <body>
-    <header class="sticky-top" style="background-color: #ffb6c1;">
+    <!--<header class="sticky-top" style="background-color: #ffb6c1;">-->
+    <header class="sticky-top" style="background-color: white">
        <div class="container-fluid">
          <!--<div class="container-fluid">あとでこれに変えて調整するかも-->
           <!--<div class="heading">-->
@@ -31,15 +32,15 @@
                 <!--サイトのロゴ-->
                 <% if admin_signed_in? %>
                   <%= link_to admin_path do %>
-                    <%= image_tag('no-image.jpg', size: "200x50") %>
+                    <%= image_tag('sharehapi.jpg', size: "200x50") %>
                   <% end %>
                 <% elsif user_signed_in? %>
                   <%= link_to posts_path do %>
-                    <%= image_tag('no-image.jpg', size: "200x50") %>
+                    <%= image_tag('sharehapi.jpg', size: "200x50") %>
                   <% end %>
                 <% else %>
                   <%= link_to root_path do %>
-                    <%= image_tag('no-image.jpg', size: "200x50") %>
+                    <%= image_tag('sharehapi.jpg', size: "200x50") %>
                   <% end %>
                 <% end %>
               </div>
@@ -104,7 +105,6 @@
                 <% end %>
               </a>
             </li>
-
             <li class="nav-item ml-5">
               <div class="mt-1 ml-4">
                 <%= link_to admin_categories_path do %>
@@ -217,16 +217,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item">
-              <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-sort-amount-down"></i> 並び替え
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item"><%= link_to '新着順', root_path %></a>
-                <a class="dropdown-item"><%= link_to '古い順', root_path(sort: 'old') %></a>
-                <a class="dropdown-item"><%= link_to 'いいね順', root_path(sort: 'good') %></a>
-              </div>
-            </li>
+            <!--<li class="nav-item">ここじゃなくて、public/home#topに貼り付けた-->
+            <!--  <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--    <i class="fas fa-sort-amount-down"></i> 並び替え-->
+            <!--  </a>-->
+            <!--  <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+            <!--    <a class="dropdown-item"><#= link_to '新着順', root_path %></a>-->
+            <!--    <a class="dropdown-item"><%#= link_to '古い順', root_path(sort: 'old') %></a>-->
+            <!--    <a class="dropdown-item"><%#= link_to 'いいね順', root_path(sort: 'good') %></a>-->
+            <!--  </div>-->
+            <!--</li>-->
 
             <div class="ml-5 mt-2">
               <p>投稿・コメント・いいね機能を使いたい人は是非登録してね♪</p>

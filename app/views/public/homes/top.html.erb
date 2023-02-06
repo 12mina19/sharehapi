@@ -3,22 +3,53 @@
 <%= notice %>
 <!--退会完了の表示されるか未確認-->
 
-<% @posts.each do |post| %>
+<div class="container-fluid">
+  <dic class="mt-2">
 
-  <%=time_ago_in_words(post.created_at)%>前
-  <%#= @post.created_at.strftime('%Y/%m/%d') %>
-  <%= post.user.name %><br>
-
-
-  <%= post.post_text %>
-  <% if post.image.attached? %>
-    <%= image_tag post.image, size: "70x70" %>
-  <% else %>
-    <%= image_tag 'no-image.jpg', size: "70x70" %>
-  <% end %>
+    <div class="text-center">
+      <div class="col-6 offset-3 border-bottom">
+        <%= link_to '新着順', root_path %>
+        <%= link_to '古い順', root_path(sort: 'old') %>
+        <%= link_to 'いいね順', root_path(sort: 'good') %>
+      </div>
+    </div>
 
 
-　<br>♥<%= post.favorites.count %> いいね
-  <p>コメント件数：<%= link_to post.comments.count, post_path(post.id) %></p>
+    <% @posts.each do |post| %>
+      <div class="row">
+        <div class="col-4 offset-4 border-bottom">
+          <div class="row">
+            <div class="col-4">
+              <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
+            </div>
+            <div class="col-5">
+              <%= post.user.name %>
+            </div>
+          </div>
+          <div class="row">
+            <%= post.post_text %>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <span style="font-size:13px;">♥<%= post.favorites.count %> いいね</span>
+            </div>
+            <div class="col-4">
+              <span style="font-size:13px;">
+                コメント件数：<%= link_to post.comments.count, post_path(post.id) %>
+              </span>
+            </div>
+          </div>
+        </div>
 
-<% end %>
+        <div class="col-1 border-bottom">
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "70x90" %>
+          <% else %>
+            <%= image_tag 'no-image.jpg', size: "70x90" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
