@@ -32,3 +32,13 @@ ja:
       over_x_years:
         one:   "1年以上"
         other: "%{count}年以上"
+
+  devise:
+    sessions:
+      signed_in: 'ログインしました。'
+      # signed_in: 'Signed in successfully.'
+      signed_out: 'ログアウトしました。'
+#      signed_out: 'Signed out successfully.'
+
+    new:
+      signed_up: 'アカウント登録が完了しました。'

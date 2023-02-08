@@ -15,14 +15,17 @@ class Public::PostsController < ApplicationController
     #上で絞ったやつにsortかける
     case params[:sort]
     when 'good'
-      
       @posts = @posts.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+      # @posts = @posts.left_joins(:favorites).group(:post_id).order("count(post_id) desc")
       # 投稿に結びついているいいねを抽出して、並び替えしてる
       # group：指定したカラムのレコードの種類ごとにデータをまとめるメソッド
       # 内部結合(join)：AとBのテーブル両方に同じIDがあったら、抽出される
       # 外部結合(left_joins)：基準となるテーブルに存在すれば、両方のテーブルになくても抽出される
       # 最初joinしか記載していなかった為、いいね順で「いいね0」の時、表示されていなかった。
       # そこで、left_joinsに記載を変更したところ、「いいね0」の時でも表示された。
+      ###############################
+      # でも後日テストでエラー出た。これだと、いいねが０個の時に正しく表示されない（表示されない”いいね０”があった）上記に書き換え
+      #この式の意味は、a.b.cをPostの中のfavoritesに見立てて、each文で回していく中で”いいねの数”をa.b.cで順番に比べて、”いいねの数”を順番に並べ替えている。
     when 'old'
       @posts = @posts.order(created_at: :asc)
     else
