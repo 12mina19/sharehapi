@@ -8,7 +8,7 @@ class Admin::PostsController < ApplicationController
 
     case params[:sort]
     when 'good'
-      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      @posts = @posts.left_joins(:favorites).group(:post_id).order("count(post_id) desc")
     when 'old'
       @posts = @posts.order(created_at: :asc)
     else

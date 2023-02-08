@@ -11,7 +11,12 @@ class Public::HomesController < ApplicationController
 
     case params[:sort]
     when 'good'
-      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      # @posts = @posts.left_joins(:favorites).group(:post_id).order("count(post_id) desc")
+      #これだと、いいねが０個の時に正しく表示されない（表示されない”いいね０”があった）
+      @posts = @posts.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+      #これに書き換えることによって、いいね０個の時に正しく表示されるようになった。
+      #この式の意味は、a.b.cをPostに見立てて、その中の”いいねの数”をa.b.cで順番に比べて、”いいねの数”を順番に並べ替えている。
+      # 投稿に結びついているいいねを抽出して、並び替えしてる
     when 'old'
       @posts = @posts.order(created_at: :asc)
     else

@@ -59,7 +59,11 @@ class Public::UsersController < ApplicationController
 
     case params[:sort]
     when 'good'
-      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      @posts = @posts.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+      # 投稿に結びついているいいねを抽出して、並び替えしてる
+      # @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      #ここをleft_joinsにしたら、public/posts#indecのいいね順で「いいね０」が表示されなくなった。
+      #joinsにしたら少し改善したが、まだ表示されないのがある。
     when 'old'
       @posts = @posts.order(created_at: :asc)
     else
@@ -78,12 +82,13 @@ class Public::UsersController < ApplicationController
   end
 
   #ログインユーザーのみのいいね一覧
-  # def myfavorites
+  # (def myfavorites)
   def user_favorites
     @user = current_user
     @favorites = Favorite.where(user_id: @user.id)
     @categories = Category.all
   end
+
 
 
 
