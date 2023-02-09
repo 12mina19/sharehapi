@@ -72,7 +72,8 @@ class Public::SessionsController < Devise::SessionsController
     if @user.valid_password?(params[:user][:password]) && @user.is_unpermitted == true
     flash[:notice] = "現在アカウントは利用停止中となっております。"
     redirect_to new_user_registration_path  #public/registrations#new 新規投稿画面へ
-    #ここでエラー文でるようにしてあげる。
+
+
     end
   end
 end
