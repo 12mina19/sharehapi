@@ -100,21 +100,21 @@
 
             <li class="nav-item">
               <div class="mt-1">
-                <%= link_to admin_users_path do %>
+                <%= link_to admin_users_path, class: "navbarlink" do %>
                   <i class="fas fa-users"></i> 会員一覧
                 <% end %>
               </a>
             </li>
             <li class="nav-item ml-5">
               <div class="mt-1 ml-4">
-                <%= link_to admin_categories_path do %>
+                <%= link_to admin_categories_path, class: "navbarlink" do %>
                   <i class="fas fa-folder-open"></i> カテゴリー関連
                 <% end %>
               </a>
             </li>
             <li>
               <div class="mt-1 ml-5">
-                 <i class="fas fa-heart"></i> <%= link_to "みんなの投稿", admin_path %>
+                 <i class="fas fa-heart"></i> <%= link_to "みんなの投稿", admin_path, class: "navbarlink" %>
               </div>
             </li>
           </ul>
@@ -125,7 +125,7 @@
 
       <!--顧客がログインしている時-->
       <% elsif user_signed_in? %>
-      <nav class="navbar sticky-top navbar-expand-lg navbar-light p-1" style="background-color: #ef857d;">
+      <nav class="navbar sticky-top navbar-expand-lg navbar-light p-1" style="background-color: #ffccdc">
       <!--sticky-topは上部固定、p-1は高さ調整-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -138,14 +138,15 @@
             <li class="nav-item">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <!--<i class="fas fa-user-cog">マイページ</i>-->
-                <i class="fas fa-user-cog"></i> マイページ
+                <!--<font color="#ff0077">-->
+                <font color="#ff1493"><i class="fas fa-user-cog"></i> マイページ</font>
 
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item"><%= link_to "my投稿一覧", users_user_index_path %></a>
-                <a class="dropdown-item"><%= link_to "お気に入り一覧", users_user_favorites_path %></a>
-                <a class="dropdown-item"><%= link_to "登録内容確認・編集", users_my_page_path %></a>
-                <a class="dropdown-item"><%= link_to "退会手続", users_unsubscribe_path %></a>
+                <a class="dropdown-item1"><%= link_to "my投稿一覧", users_user_index_path, class: "dropdown-item1" %></a>
+                <a class="dropdown-item"><%= link_to "お気に入り一覧", users_user_favorites_path, class: "dropdown-item1" %></a>
+                <a class="dropdown-item"><%= link_to "登録内容確認・編集", users_my_page_path, class: "dropdown-item1" %></a>
+                <a class="dropdown-item"><%= link_to "退会手続", users_unsubscribe_path, class: "dropdown-item1" %></a>
               </div>
             </li>
 
@@ -174,10 +175,11 @@
               <% end %>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item ml-4">
               <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-folder-open"></i> カテゴリー検索
-                <!--<i class="fa-regular fa-folder-open"></i>カテゴリー-->
+                <font color="#0095d9">
+                  <i class="fas fa-folder-open"></i> カテゴリー検索
+                </font>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <!--ここのカテゴリーはeach文で回して表示させる-->
@@ -186,18 +188,21 @@
                     <!--idを指定して取り出したい時は↑こういう書き方になる-->
                     <!--(genre_id: genre.id)これ書かないとエラー出る。-->
                     <!--genre_idで検索をかけて、その中(左側のgenre_id)からgenre.idというのを探す。数に例えると分かりやすい-->
-                    <!--NoMethodError in Public::Posts#newこのエラーはわかる。もしかして、navberにカテゴリー設定したから全ての画面で定義が必要なのかな…？混乱してきた-->
                 <% end %>
               </div>
             </li>
             <li>
-              <div class="mt-2 ml-3">
-                 <i class="fas fa-heart"></i> <%= link_to "みんなの投稿", posts_path %>
+              <div class="mt-2 ml-4">
+                <font color="#00ac9b">
+                  <i class="fas fa-heart"></i> <%= link_to "みんなの投稿", posts_path, class: "navbarlink1" %>
+                </font>
               </div>
             </li>
             <li>
-              <div class="mt-2 ml-3">
-                <i class="fas fa-edit"></i> <%= link_to "新規投稿", new_post_path %>
+              <div class="mt-2 ml-5">
+                <font color="#d9333f">
+                  <i class="fas fa-edit"></i> <%= link_to "新規投稿", new_post_path, class: "navbarlink2" %>
+                </font>
               </div>
             </li>
 
@@ -209,7 +214,7 @@
 
       <!--管理者と顧客がログインしていない時-->
       <% else %>
-        <nav class="navbar sticky-top  navbar-expand-lg navbar-light p-1" style="background-color: #ef857d;">
+        <nav class="navbar sticky-top  navbar-expand-lg navbar-light p-1" style="background-color: #ffccdc;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -229,7 +234,9 @@
             <!--</li>-->
 
             <div class="ml-5 mt-2">
-              <p>投稿・コメント・いいね機能を使いたい人は是非登録してね♪</p>
+
+              <p><font size="2">登録すると、投稿・コメント・各種マイページ機能が使えるよ ♪</font></p>
+
             </div>
           </ul>
 

@@ -20,9 +20,9 @@
 // ナビバー(ヘッダー2段目)の位置を調整
 .dropdown-menu {
   position: absolute;
-  left: 50%;
+  left: 40%;
+  //位置調整したいときにこれを使うと便利
   transform: translateX(-50%);
-  // 0%のときはちょうど真ん中。位置調整したいときにこれを使うと便利
   text-align: center;
 }
 
@@ -55,16 +55,6 @@ label[for="email/admin"] {
   width: 120px;
 }
 
-// うまくいかなかったやつ
-// .center_box {
-// text-align: center;
-// }
-// .center_box p {
-// display: inline-block;
-// text-align: left;
-// }
-
-
 // public/posts#new
 .left {
     margin-right: auto;
@@ -78,9 +68,20 @@ label[for="email/admin"] {
   text-align: center;
 }
 
-//////////////////////////////////////
 
-// Public::Posts#index
-// .post_index {
-//   text-align: center;
-// }
+.navbarlink1 {
+  text-decoration: none!important;
+  // ナビバーのlink_toの下線を消す
+   color: #00ac9b ;
+}
+
+.navbarlink2 {
+  text-decoration: none!important;
+  // ナビバーのlink_toの下線を消す
+   color: #d9333f ;
+}
+
+.dropdown-item1 {
+  color: #ff1493 ;
+}
+
