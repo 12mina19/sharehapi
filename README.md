@@ -6,13 +6,14 @@
 それらを思い出として記録できるコミュニティサイト。
 
 ### テーマを選んだ理由
-誰かに聞いてもらいたい嬉しい出来事があったと思っても、<br>
+誰かに聞いてもらいたい嬉しい出来事があったとしても、<br>
 知人と繋がっているコミュニティサイトでは気まずかったり、<br>
 自慢していると思われたくないと躊躇する人がいると思います。<br>
 あと、コロナの影響で周りの目を気にして、旅行などの投稿を控えたりすることもあるでしょう。<br>
 
-なので、人々が大小問わず嬉しかった出来事や幸せを感じた瞬間を自由に発信でき、<br>
-妬みなしでhappyな出来事をシェアできる平和な場所を作りたいと思い、この掲示板の制作に着手しました。<br>
+なので、人々が大小問わず嬉しかった出来事や幸せを感じた瞬間を気兼ねなく投稿できる場所を作りたいと思い、<br>
+このコミュニティサイトの制作に着手しました。<br>
+happyな出来事を妬みなしでシェアできる平和な場所になったら嬉しいです。<br>
 
 コロナ渦でテレワークになったり、飲み会が減ったりと、コミュニケーションの場が減っているので、<br>
 この掲示板を通して、人々のコミュニケーションが少しでも増えたら幸いです。<br>
@@ -37,8 +38,8 @@
 
 
 ## 設計書
-・実装機能リスト：https://docs.google.com/spreadsheets/d/1TmJccnKONSRP7JMPVDvd0CWB2pOJa6m-mAJ7X7ikYaE/edit?usp=sharing  
-・UI Flows: https://drive.google.com/file/d/1zhHORWG39Kk_SpQItYIXLzVp1Vw_jBCA/view?usp=sharing  
+・実装機能リスト：https://docs.google.com/spreadsheets/d/1TmJccnKONSRP7JMPVDvd0CWB2pOJa6m-mAJ7X7ikYaE/edit?usp=sharing
+・UI Flows: https://drive.google.com/file/d/1zhHORWG39Kk_SpQItYIXLzVp1Vw_jBCA/view?usp=sharing
 ・ワイヤーフレーム、ER図：https://drive.google.com/file/d/1ZPpKOgwUkcDgbSJ6-MeqIT6qksgvNPWf/view?usp=sharing
 
 ※現在、テーブル定義書、詳細設計は未作成です。
