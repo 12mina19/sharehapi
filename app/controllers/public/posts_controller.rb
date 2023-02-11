@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
   def index
     if params[:category_id]
       post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id').page(params[:page])
-      # post_ids => [1,4]
+      # 例）post_ids => [1,4]
       @category = params[:category_id]
       @posts = Post.where(id: post_ids)
       #該当するcategoryの投稿を抽出
@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
       # 外部結合(left_joins)：基準となるテーブルに存在すれば、両方のテーブルになくても抽出される
       # 最初joinしか記載していなかった為、いいね順で「いいね0」の時、表示されていなかった。
       # そこで、left_joinsに記載を変更したところ、「いいね0」の時でも表示された。
-      ###############################
+      #####
       # でも後日テストでエラー出た。これだと、いいねが０個の時に正しく表示されない（表示されない”いいね０”があった）上記に書き換え
       #この式の意味は、a.b.cをPostの中のfavoritesに見立てて、each文で回していく中で”いいねの数”をa.b.cで順番に比べて、”いいねの数”を順番に並べ替えている。
     when 'old'
@@ -32,7 +32,7 @@ class Public::PostsController < ApplicationController
       @posts = @posts.order(created_at: :desc).page(params[:page])
     end
 
-    @categories = Category.all#この位置は影響ある…？
+    @categories = Category.all
     @comments = Comment.all
   end
 
@@ -51,7 +51,7 @@ class Public::PostsController < ApplicationController
         @post.post_categories.create!(category_id: id)
         #いいね機能と同じようなイメージ
         #ここで、PostモデルとPostcategoryモデル・categoryモデルを紐付けているイメージ
-        #post_categoryモデルと作ることで、カテゴリー（タグ）が紐付く。カテゴリーidとPost idをpost_categoryに格納。
+        #post_categoryモデルと作ることで、カテゴリー(タグ)が紐付く。カテゴリーidとPost idをpost_categoryに格納。
         #タグ付けも同じ方法で出来る。
       end
       redirect_to posts_path

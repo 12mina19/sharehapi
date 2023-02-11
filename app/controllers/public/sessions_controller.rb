@@ -59,6 +59,7 @@ class Public::SessionsController < Devise::SessionsController
     end
   end
 
+
     # return if <ある場合でない時>
     #   <処理手順>
     # if <ある場合>
@@ -72,8 +73,7 @@ class Public::SessionsController < Devise::SessionsController
     if @user.valid_password?(params[:user][:password]) && @user.is_unpermitted == true
     flash[:notice] = "現在アカウントは利用停止中となっております。"
     redirect_to new_user_registration_path  #public/registrations#new 新規投稿画面へ
-
-
     end
   end
+
 end

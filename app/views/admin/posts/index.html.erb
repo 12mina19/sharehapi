@@ -23,7 +23,7 @@
           <%= post.post_text %>
         </div>
 
-        <div class="row">
+        <div class="row mt-2">
           <div class="col-3">
             <% unless current_user.nil? %>
               <% if post.favorited_by?(current_user) %>

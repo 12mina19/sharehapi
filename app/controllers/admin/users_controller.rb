@@ -18,18 +18,6 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_user_path(@user.id)#admin/user#showへ
   end
 
-
-
-  #destroyじゃなくて退会処理みたいにできないか？
-  # def unpermitted
-  #   @user = User.find(params[:id])
-  #   @user.update(is_unpermitted: true)
-  #   reset_session
-  #   redirect_to admin_user_path(@user.id)#admin/user#showへ
-  # end
-
-
-
   protected
 
   def user_params

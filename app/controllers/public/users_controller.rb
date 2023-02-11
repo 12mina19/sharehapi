@@ -36,7 +36,7 @@ class Public::UsersController < ApplicationController
     #rootページにフラッシュメッセージの<%= notice %>を設置してみたが果たしてちゃんと処理されているだろうか…？？？後で確認する
   end
 
-  #ログインユーザーのみの投稿一覧
+  #ログインユーザーのみの投稿一覧（土台）
   # def user_index
   #   @user = current_user
   #   @posts = @user.posts
@@ -82,15 +82,11 @@ class Public::UsersController < ApplicationController
   end
 
   #ログインユーザーのみのいいね一覧
-  # (def myfavorites)
   def user_favorites
     @user = current_user
     @favorites = Favorite.where(user_id: @user.id)
     @categories = Category.all
   end
-
-
-
 
   protected
 
