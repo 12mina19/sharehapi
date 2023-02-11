@@ -9,7 +9,7 @@
       </div>
 
  <% @posts.each do |post| %>
-   <div class="row">
+   <div class="row mt-2">
      <div class="col-5 offset-3 border-bottom">
         <div class="row">
           <div class="col-4">
@@ -58,9 +58,9 @@
 
       <div class="col-1 border-bottom">
         <% if post.image.attached? %>
-          <%= image_tag post.image, size: "70x70" %>
-        <% else %>
-          <%= image_tag 'no-image.jpg', size: "70x70" %>
+          <%= image_tag post.image, size: "80x100" %>
+        <%# else %>
+          <%#= image_tag 'no-image.jpg', size: "70x70" %>
         <% end %>
       </div>
     </div>

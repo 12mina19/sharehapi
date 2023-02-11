@@ -26,6 +26,38 @@
   text-align: center;
 }
 
+// 管理者のナビバー文字色変更
+.navbarlink {
+   color: #13161a ;
+}
+
+.navbarlink1 {
+  text-decoration: none!important;
+  // ナビバーのlink_toの下線を消す
+   color: #00ac9b ;
+}
+
+.navbarlink2 {
+  text-decoration: none!important;
+  // ナビバーのlink_toの下線を消す
+   color: #d9333f ;
+}
+
+
+.navbarlink1:link, .navbarlink1:visited, .navbarlink1:hover, .navbarlink1:active {
+  color: #00ac9b;
+}
+
+.navbarlink2:link, .navbarlink2:visited, .navbarlink2:hover, .navbarlink2:active {
+  color: #d9333f;
+}
+
+.dropdown-item1 {
+  color: #ff1493 ;
+}
+
+
+
 // public/user#edit
 // ※labelはhtmlだけでは横幅変えられないためCSSで調整
 label[for="inputName"] {
@@ -66,27 +98,6 @@ label[for="email/admin"] {
 .new_post {
   //margin:  0 auto;
   text-align: center;
-}
-
-// 管理者のナビバー文字色変更
-.navbarlink {
-   color: #13161a ;
-}
-
-.navbarlink1 {
-  text-decoration: none!important;
-  // ナビバーのlink_toの下線を消す
-   color: #00ac9b ;
-}
-
-.navbarlink2 {
-  text-decoration: none!important;
-  // ナビバーのlink_toの下線を消す
-   color: #d9333f ;
-}
-
-.dropdown-item1 {
-  color: #ff1493 ;
 }
 
 /* CSSコード */

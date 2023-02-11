@@ -21,7 +21,7 @@
 
 
       <% @posts.each do |post| %>
-        <div class="row">
+        <div class="row mt-2">
           <div class="col-5 offset-3 border-bottom">
           <!--offsetの意味は左側をあけるという意味（今回はcol-3個分）-->
             <div class="row">
@@ -33,7 +33,7 @@
                 <%= post.user.name %><br>
               </div>
             </div>
-            <div class="row">
+            <div class="row mb-1">
               <%= post.post_text %><br>
             </div>
             <div class="row">
@@ -64,8 +64,8 @@
           <div class="col-1 border-bottom">
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "80x100" %>
-            <% else %>
-              <%= image_tag 'no-image.jpg', size: "80x100" %>
+            <%# else %>
+              <%#= image_tag 'no-image.jpg', size: "80x100" %>
             <% end %>
           </div>
         </div>

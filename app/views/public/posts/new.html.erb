@@ -5,7 +5,8 @@
 
       <div class="new_post">
         <div class="left">
-          <h4>新規投稿</h4>
+
+          <h4><%= image_tag 'toukou.png', size: "40x40" %> 新規投稿</h4>
 
           <%= form_with  url: posts_path, method: :post do |f| %>
 
@@ -15,14 +16,14 @@
           </div>
 
           <div class="mt-3">
-            <label>②カテゴリー選択（複数選択可能）</label><br>
+            <label>②カテゴリー選択<font size="1">（複数選択可能）</font></label><br>
             <%= f.collection_check_boxes :category_ids, Category.all, :id, :name  %>
             <!--この1行を書けばいい。Category.allでカテゴリーモデルの全ての情報がゲット出来る。そして、その中で必要な情報は：idと：name-->
             <!--each文を使って全カテゴリーを表示させることもできるが、Category.allを書くだけで、each文を書く必要がなくなる！便利！-->
           </div>
 
           <div class="mt-3">
-            <label>③共有したい写真があればUPしよう♪（任意）</label><br>
+            <label>③共有したい写真があればUPしよう♪<font size="1">（任意）</font></label><br>
             <%= f.file_field :image, accept: "image/*" %>
           </div>
 

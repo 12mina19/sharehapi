@@ -15,7 +15,7 @@
   <dic class="mt-2">
 
     <% @posts.each do |post| %>
-      <div class="row">
+      <div class="row mt-2">
         <div class="col-4 offset-4 border-bottom">
           <div class="row">
             <div class="col-4">
@@ -43,9 +43,9 @@
 
         <div class="col-1 border-bottom">
           <% if post.image.attached? %>
-            <%= image_tag post.image, size: "70x90" %>
-          <% else %>
-            <%= image_tag 'no-image.jpg', size: "70x90" %>
+            <%= image_tag post.image, size: "80x100" %>
+          <%# else %>
+            <%#= image_tag 'no-image.jpg', size: "70x90" %>
           <% end %>
         </div>
       </div>
