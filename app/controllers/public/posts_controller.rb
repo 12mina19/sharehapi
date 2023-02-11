@@ -31,7 +31,6 @@ class Public::PostsController < ApplicationController
       @posts = @posts.order(created_at: :asc)
     else
       @posts = @posts.order(created_at: :desc)
-      #最後に.per(7)みたいに表示件数を制限することもできる
     end
 
     @categories = Category.all
