@@ -34,7 +34,6 @@ happyな出来事を妬みなしでシェアできる平和な場所になった
 - 会社で上司に褒められた。努力が認められて嬉しい！
 - 頑張って貯金して、念願の沖縄旅行🍹
 - 自分にご褒美でたくさんケーキ買った🍰
--
 
 
 ## 設計書
@@ -52,6 +51,6 @@ happyな出来事を妬みなしでシェアできる平和な場所になった
 - IDE：Cloud9
 
 ## 使用素材
-カクレノ- https://kotonohaworks.com/free-icons/
-シルエットイラスト- https://www.silhouette-illust.com/
-いらすとや- https://www.irasutoya.com/
+- カクレノ- https://kotonohaworks.com/free-icons/
+- シルエットイラスト- https://www.silhouette-illust.com/
+- いらすとや- https://www.irasutoya.com/
