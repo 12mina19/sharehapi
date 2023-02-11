@@ -2,10 +2,10 @@ class Public::PostsController < ApplicationController
 
   def index
     if params[:category_id]
-      post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id').page(params[:page])
+      post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
       # 例）post_ids => [1,4]
       @category = params[:category_id]
-      @posts = Post.where(id: post_ids)
+      @posts = Post.where(id: post_ids).page(params[:page])
       #該当するcategoryの投稿を抽出
     else
       @posts = Post.all
@@ -15,7 +15,8 @@ class Public::PostsController < ApplicationController
     #上で絞ったやつにsortかける
     case params[:sort]
     when 'good'
-      @posts = @posts.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}.page(params[:page])
+      #.page(params[:page])つけたらエラー出た
+      @posts = @posts.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
       # @posts = @posts.left_joins(:favorites).group(:post_id).order("count(post_id) desc")
       # 投稿に結びついているいいねを抽出して、並び替えしてる
       # group：指定したカラムのレコードの種類ごとにデータをまとめるメソッド
@@ -27,9 +28,10 @@ class Public::PostsController < ApplicationController
       # でも後日テストでエラー出た。これだと、いいねが０個の時に正しく表示されない（表示されない”いいね０”があった）上記に書き換え
       #この式の意味は、a.b.cをPostの中のfavoritesに見立てて、each文で回していく中で”いいねの数”をa.b.cで順番に比べて、”いいねの数”を順番に並べ替えている。
     when 'old'
-      @posts = @posts.order(created_at: :asc).page(params[:page])
+      @posts = @posts.order(created_at: :asc)
     else
-      @posts = @posts.order(created_at: :desc).page(params[:page])
+      @posts = @posts.order(created_at: :desc)
+      #最後に.per(7)みたいに表示件数を制限することもできる
     end
 
     @categories = Category.all

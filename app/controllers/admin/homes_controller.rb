@@ -7,11 +7,11 @@ class Admin::HomesController < ApplicationController
 
     case params[:sort]
     when 'good'
-      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc")
+      @posts = @posts.joins(:favorites).group(:post_id).order("count(post_id) desc").page(params[:page])
     when 'old'
-      @posts = @posts.order(created_at: :asc)
+      @posts = @posts.order(created_at: :asc).page(params[:page])
     else
-      @posts = @posts.order(created_at: :desc)
+      @posts = @posts.order(created_at: :desc).page(params[:page])
     end
 
     @categories = Category.all

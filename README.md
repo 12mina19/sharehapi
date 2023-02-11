@@ -36,19 +36,20 @@ happyな出来事を妬みなしでシェアできる平和な場所になった
 - 自分にご褒美でたくさんケーキ買った🍰
 
 
-## 設計書
-・実装機能リスト：https://docs.google.com/spreadsheets/d/1TmJccnKONSRP7JMPVDvd0CWB2pOJa6m-mAJ7X7ikYaE/edit?usp=sharing
-・UI Flows: https://drive.google.com/file/d/1zhHORWG39Kk_SpQItYIXLzVp1Vw_jBCA/view?usp=sharing
-・ワイヤーフレーム、ER図：https://drive.google.com/file/d/1ZPpKOgwUkcDgbSJ6-MeqIT6qksgvNPWf/view?usp=sharing
-
-※現在、テーブル定義書、詳細設計は未作成です。
-
 ## 開発環境
 - OS：Linux(CentOS)
+- DB：sqlite3
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## 本番環境
+- OS：EC2(Linux)
+- DB：RDS(MySQL)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
 
 ## 使用素材
 - カクレノ- https://kotonohaworks.com/free-icons/
