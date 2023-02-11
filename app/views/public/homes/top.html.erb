@@ -21,7 +21,7 @@
 
     <% @posts.each do |post| %>
       <div class="row">
-        <div class="col-7 offset-4 border-bottom">
+        <div class="col-7 offset-3 border-bottom">
           <div class="row">
             <div class="col-4">
               <span style="font-size:13px;"><%=time_ago_in_words(post.created_at)%>前</span>
@@ -59,11 +59,57 @@
 
     </div>
 
-    <div class="col-2 offset-1">
-    　<div>サイドバー</div>
-    　ここにサイトの説明や<br>
-    　使い方を記述する。
-    　現在未作成。
+    <!--<div class="col-2 offset-1">-->
+    <div class="col-3 ml-2">
+    　<!--<div>サイドバー</div>-->
+    　<!--ここにサイトの説明や<br>-->
+    　<!--使い方を記述する。-->
+    　<!--現在未作成。-->
+    　<div class="sidebarbox">
+
+        <div class="mb-3">
+      　<%= image_tag 'travel.png', size: "60x60" %>
+      　<%= image_tag 'goukaku.png', size: "50x50" %>
+      　<%= image_tag 'valentine.png', size: "50x50" %>
+      　</div>
+
+        <!--<p>-->
+      　<strong>シェアハピとは？</strong><br>
+      　<font size="1">
+      　大小問わず嬉しいことがあったら、<br>
+      　この掲示板に書き込んで思い出に残そう❤<br>
+      　誰かに聞いてほしい…<br>
+      　でも知人とつながっているSNSでは発信しにくい…<br>
+      　そんな時は是非この掲示板をご利用ください♬<br>
+
+        ※相手に対して思いやりに欠ける発言はしないでください<br>
+        </font>
+      　<!--</p>-->
+
+      　<!--<p>-->
+      　<!--<font size="1">-->
+      　<!--大小問わず嬉しいことがあったら、<br>-->
+      　<!--この掲示板に書き込んで思い出に残そう❤<br>-->
+      　<!--誰かに聞いてほしい…<br>-->
+      　<!--でも知人とつながっているSNSでは発信しにくい…<br>-->
+      　<!--そんな時は是非この掲示板をご利用ください♬<br>-->
+
+       <!-- ※相手に対して思いやりに欠ける発言は<br>-->
+       <!-- しないでください。-->
+       <!-- </font>-->
+       <!-- </p>-->
+
+
+      　<!--<p>-->
+      　<div>
+      　<%= image_tag 'bonus.png', size: "50x50" %>
+      　<%= image_tag 'yakegui.png', size: "50x50" %>
+      　<%= image_tag 'shopping.png', size: "50x50" %>
+      　</div>
+      　<!--</p>-->
+
+    　</div>
+
     </div>
 
   </div>
