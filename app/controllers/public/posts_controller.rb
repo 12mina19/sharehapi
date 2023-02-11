@@ -5,7 +5,7 @@ class Public::PostsController < ApplicationController
       post_ids = PostCategory.where(category_id: params[:category_id]).pluck('post_id')
       # 例）post_ids => [1,4]
       @category = params[:category_id]
-      @posts = Post.where(id: post_ids).page(params[:page])
+      @posts = Post.where(id: post_ids)
       #該当するcategoryの投稿を抽出
     else
       @posts = Post.all
