@@ -23,9 +23,7 @@
               <label for="inputName/admin">名前</label>
             </div>
             <div class="col-2">
-              <%= f.text_field :last_name, autofocus: true, :placeholder =>"#{@user.name}", id:"inputName/admin" %><br>
-              <!--Qどうしてこれだけ灰色の文字？？-->
-              <!--<label for="email/admin">メールアドレス</label>-->
+              <%= f.text_field :name, autofocus: true, :placeholder =>"#{@user.name}", id:"inputName/admin" %><br>
             </div>
           </div>
 

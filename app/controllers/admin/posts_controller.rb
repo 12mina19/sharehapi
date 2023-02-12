@@ -29,9 +29,7 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_path
-    #今admin/homes#topに遷移するようにしてある
-    #admin/users#showか#index(個別)のままでもいいかも
+    redirect_to admin_posts_path(user_id: params[:user_id])
   end
 
 

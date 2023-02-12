@@ -20,7 +20,8 @@
     </div>
 
 
-      <% @posts.each do |post| %>
+    <% @posts.each do |post| %>
+      <% if post.user.is_deleted == false %>
         <div class="row mt-2">
           <div class="col-5 offset-3 border-bottom">
           <!--offsetの意味は左側をあけるという意味（今回はcol-3個分）-->
@@ -70,6 +71,7 @@
           </div>
         </div>
       <% end %>
+    <% end %>
   </div>
 </div>
 

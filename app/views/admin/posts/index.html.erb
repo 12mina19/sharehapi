@@ -50,7 +50,7 @@
 
           <div class="col-4">
             <span style="font-size:13px;">
-              <%= link_to "管理者用：削除", admin_post_path(post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+              <%= link_to "管理者用：削除", admin_post_path(post.id, user_id: params[:user_id]), method: :delete, "data-confirm" => "本当に削除しますか？" %>
             </span>
           </div>
         </div>
